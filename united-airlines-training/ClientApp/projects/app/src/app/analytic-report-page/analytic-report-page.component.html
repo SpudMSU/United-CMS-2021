@@ -1,0 +1,390 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-12 text-center mt-4" *ngIf="!noResults">
+      <h1 class="mb-5">{{reportTitle}}</h1>
+      <section [hidden]="!showFilter" id="input_section">
+        <form class="filter-form">
+          Filter:
+          <mat-form-field class="full-width">
+
+            <mat-label>Location</mat-label>
+            <input type="text" placeholder="Input or select location" aria-label="Location" matInput
+              [formControl]="locationControl" [matAutocomplete]="location" [(ngModel)]="locationFilter">
+            <button mat-button *ngIf="locationFilter" matSuffix mat-icon-button aria-label="Clear"
+              (click)="locationFilter=''">
+              <mat-icon>close</mat-icon>
+            </button>
+            <mat-autocomplete #location="matAutocomplete">
+              <mat-option *ngFor="let location of locationOptions | async" [value]="location">
+                {{location}}
+              </mat-option>
+            </mat-autocomplete>
+          </mat-form-field>
+          <mat-form-field class="full-width">
+
+            <mat-label>Cost Center</mat-label>
+            <input type="text" placeholder="Input or select cost center" aria-label="Cost Center" matInput
+              [formControl]="costControl" [matAutocomplete]="cost" [(ngModel)]="costFilter">
+            <button mat-button *ngIf="costFilter" matSuffix mat-icon-button aria-label="Clear" (click)="costFilter=''">
+              <mat-icon>close</mat-icon>
+            </button>
+            <mat-autocomplete #cost="matAutocomplete">
+              <mat-option *ngFor="let cost of costOptions | async" [value]="cost">
+                {{cost}}
+              </mat-option>
+            </mat-autocomplete>
+          </mat-form-field>
+          <mat-form-field class="full-width">
+
+            <mat-label>Department</mat-label>
+            <input type="text" placeholder="Input or select department" aria-label="Department" matInput
+              [formControl]="departmentControl" [matAutocomplete]="department" [(ngModel)]="departmentFilter">
+            <button mat-button *ngIf="departmentFilter" matSuffix mat-icon-button aria-label="Clear"
+              (click)="departmentFilter=''">
+              <mat-icon>close</mat-icon>
+            </button>
+            <mat-autocomplete #department="matAutocomplete">
+              <mat-option *ngFor="let department of departmentOptions | async" [value]="department">
+                {{department}}
+              </mat-option>
+            </mat-autocomplete>
+          </mat-form-field>
+          <button color="primary" id="search-btn" mat-flat-button (click)="filtMedia()">Confirm</button>
+        </form>
+      </section>
+      <button mat-flat-button aria-label="Export As PDF files" color="success" (click)="exportPDF()">
+        <h5>
+          <i class="material-icons icon-size">
+            download_for_offline</i>
+          Export PDF
+        </h5>
+      </button>
+      <button mat-flat-button aria-label="Export As PDF files" color="success" (click)="exportCSV()">
+        <h5>
+          <i class="material-icons icon-size">
+            download_for_offline</i>
+          Export CSV
+        </h5>
+      </button>
+      <mat-divider></mat-divider>
+      <p></p>
+    </div>
+  </div>
+
+  <div *ngIf="noResults" class="row mt-5">
+    <div class="col-md-12 text-center">
+      <h5>{{reportInfo}}</h5>
+      <mat-spinner *ngIf="!noResults"></mat-spinner>
+      <button mat-flat-button color="warn" routerLink="/analytics">Try Another Search</button>
+    </div>
+  </div>
+</div>
+
+<div *ngIf="!noResults" id="report-content">
+
+  <div *ngIf="this.reportType == 'user' || this.reportType=='userAlt'">
+    <div class="d-sm-flex flex-sm-column flex-lg-row">
+      <div class="margin-diff-left d-sm-flex justify-content-sm-center">
+        <i class="material-icons icon-big-size">person</i>
+      </div>
+      <div class="ml-lg-5 mid d-sm-flex justify-content-sm-center flex-sm-column">
+        <h2 class="d-sm-flex justify-content-sm-center d-lg-flex justify-content-lg-start">{{this.user.firstName}}
+          {{this.user.lastName}}</h2>
+        <div class="small-height align-self-sm-center">
+          <p><i class="material-icons icon-size-sm mr-1">email</i> {{this.user.email}}</p>
+          <p><i class="material-icons icon-size-sm mr-1">location_on</i> {{this.user.locationCode}}</p>
+          <p><i class="material-icons icon-size-sm mr-1">work</i> {{this.user.department}}</p>
+        </div>
+      </div>
+      <div class="d-sm-flex flex-sm-row justify-content-sm-around">
+        <div class="margin-diff-left">
+          <div class="card border-primary mb-3" style="width: 10rem; height: 10rem;">
+            <div class="card-header" style="height: 4em;">
+              <h5 class="card-title text-center">Total Ratings</h5>
+              <div class="icon-info tooltips">
+                <i class="material-icons">info_outline</i><span class="tooltipstext">
+                  Total number ratings (likes and dislikes) for the user on all media items.
+                </span>
+              </div>
+            </div>
+            <div class="card-body">
+              <p class="card-text text-center">{{ratingCount}}</p>
+            </div>
+          </div>
+        </div>
+        <div class="margin-diff-left">
+          <div class="card border-primary mb-3" style="width: 10rem; height: 10rem;">
+            <div class="card-header" style="height: 4em;">
+              <h5 class="card-title text-center">Total Comments</h5>
+              <div class="icon-info tooltips">
+                <i class="material-icons">info_outline</i><span class="tooltipstext">
+                  Total number of comments the user has made on all media items.
+                </span>
+              </div>
+            </div>
+            <div class="card-body">
+              <p class="card-text text-center">{{commentCount}}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="mt-5">
+      <div class="d-xl-flex justify-content-xl-around flex-xl-row d-sm-flex flex-sm-column justify-content-sm-center">
+        <div class="half-table align-self-sm-center">
+          <h2 class="text-center">Open/Played Media</h2>
+          <div class="table-responsive">
+            <table matSort (matSortChange)="sortUser($event)"  class="table mt-5">
+              <thead>
+                <tr>
+                  <th mat-sort-header="mediaID" scope="col">MediaID</th>
+                  <th mat-sort-header="mediaTitle" scope="col">Title</th>
+                  <th mat-sort-header="mediaType" scope="col">Media Type</th>
+                  <th mat-sort-header="createdAt" scope="col" style="width: 20em;">Media Upload Date</th>
+                  <th scope="col">Run Report</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr
+                  *ngFor="let media of sortedData | paginate: { id: 'pagination1', itemsPerPage: perPageCount, currentPage: p }; let i = index">
+                  <td scope="row">{{media.mediaID}}</td>
+                  <td style="width: 18em;">{{media.title}}</td>
+                  <td *ngIf="openOrPlayedTypes[i + indexForP1]">{{openOrPlayedTypes[i + indexForP1].name}}</td>
+                  <td>{{convertUTCDateToLocalDate(this.media["createdAt"])}}</td>
+                  <td><i routerLink="/report/media/{{encodeVal(media.mediaID)}}"
+                      class="material-icons point">insert_chart</i></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="pagNation mb-5">
+            <pagination-controls id="pagination1" class="my-pagination mt-3" (click)="updateIndexP1(p)"
+              (pageChange)="p = $event"></pagination-controls>
+          </div>
+        </div>
+        <div class="half-table align-self-sm-center">
+          <h2 class="text-center">Recommended Media</h2>
+          <div class="table-responsive">
+            <table class="table mt-5">
+              <thead>
+                <tr>
+                  <th scope="col">MediaID</th>
+                  <th scope="col">Title</th>
+                  <th scope="col">Media Type</th>
+                  <th scope="col" style="width: 20em;">Media Upload Date</th>
+                  <th scope="col">Run Report</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr
+                  *ngFor="let rec of recommended | paginate: { id: 'pagination2', itemsPerPage: perPageCount, currentPage: p2 }; let i = index">
+                  <td scope="row">{{rec.mediaID}}</td>
+                  <td style="width: 18em;">{{rec.title}}</td>
+                  <td *ngIf="recommendedTypes[i + indexForP2]">{{recommendedTypes[i + indexForP2].name}}</td>
+                  <td>{{convertUTCDateToLocalDate(this.rec["createdAt"])}}</td>
+                  <td><i routerLink="/report/media/{{encodeVal(rec.mediaID)}}"
+                      class="material-icons point">insert_chart</i></td>
+                </tr>
+              </tbody>
+            </table>
+            <div class="pagNation mb-5">
+              <pagination-controls id="pagination2" class="my-pagination mt-3" (click)="updateIndexP2(p2)"
+                (pageChange)="p2 = $event"></pagination-controls>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
+  <div *ngIf="this.reportType == 'media' || this.reportType=='mediaAlt'">
+    <div class="d-sm-flex flex-sm-column flex-lg-row">
+      <div class="margin-diff-left d-sm-flex justify-content-sm-center">
+        <img src="{{SitePath + media.thumbnailPath}}" class="resize" />
+      </div>
+      <div class="ml-lg-5 mid d-sm-flex justify-content-sm-center flex-sm-column align-self-sm-center">
+        <div class="align-self-sm-center">
+          <h2>{{this.media.title}}</h2>
+          <p class="desc">{{this.media.description}}</p>
+          <p class="desc">Uploaded {{convertUTCDateToLocalDate(this.media.createdAt)}}</p>
+        </div>
+        <div class="align-self-sm-center align-self-lg-start">
+          <h5 title="PDF" *ngIf="this.type == 'pdf'"><i class="material-icons icon-size">library_books</i> PDF</h5>
+          <h5 title="HTML" *ngIf="this.type == 'html'"><i class="material-icons icon-size">video_label</i> HTML</h5>
+          <h5 title="MP4" *ngIf="this.type == 'mp4'"><i class="material-icons icon-size">ondemand_video</i> MP4 Video
+          </h5>
+          <h5 title="Course Training Manual" *ngIf="this.type == 'CourseTrainingManual'"><i
+              class="material-icons icon-size">folder</i> Course Training Manual</h5>
+          <h5 title="Tech Talk" *ngIf="this.type == 'TechTalk'"><i class="material-icons icon-size">person</i> Tech Talk
+          </h5>
+          <h5 title="Virtual Reality" *ngIf="this.type == 'ExternalLink'"><i
+              class="material-icons icon-size">language</i> External Link</h5>
+        </div>
+      </div>
+      <div class="margin-diff-left-sm align-self-sm-center">
+        <div class="card border-primary mb-3" style="max-width: 14rem; min-width: 14rem; height: 10rem;">
+          <div class="card-header" style="height: 4em;">
+            <h5 class="card-title text-center">Utilization</h5>
+            <div class="icon-info tooltips"><i class="material-icons">info_outline</i><span class="tooltipstext">The
+                media utilization relative to all other active media.
+                It gives a percentage based on click through rate. The higher the percentage, the higher the user
+                engagement.</span>
+            </div>
+          </div>
+          <div class="card-body">
+            <p class="card-text">{{(utilization * 100).toFixed(1)}}%</p>
+          </div>
+        </div>
+      </div>
+      <div class="margin-diff-left-sm align-self-sm-center">
+        <div class="card border-primary mb-3" style="max-width: 14rem; min-width: 14rem; height: 10rem;">
+          <div class="card-header" style="height: 4em;">
+            <h5 class="card-title text-center">Like/Dislike Ratio</h5>
+            <div class="icon-info tooltips">
+              <i class="material-icons">info_outline</i><span class="tooltipstext">
+                A ratio is calculated to give the amount of likes over the total likes and dislikes combined. A media
+                that has more likes than dislikes will receive a higher ratio.
+              </span>
+            </div>
+          </div>
+          <div class="card-body">
+            <p class="card-text">{{(ldRatio * 100).toFixed(1)}}%</p>
+            <p *ngIf="likes == 1 && dislikes == 1">{{likes}} like / {{dislikes}} dislike</p>
+            <p *ngIf="likes == 1 && dislikes != 1">{{likes}} like / {{dislikes}} dislikes</p>
+            <p *ngIf="likes != 1 && dislikes == 1">{{likes}} likes / {{dislikes}} dislike</p>
+            <p *ngIf="likes != 1 && dislikes != 1">{{likes}} likes / {{dislikes}} dislikes</p>
+          </div>
+        </div>
+      </div>
+
+      <div *ngIf="this.type == 'mp4'" class="margin-diff-left-sm align-self-sm-center">
+        <div class="card border-primary mb-3" style="max-width: 14rem; min-width: 14rem; height: 10rem;">
+          <div class="card-header" style="height: 4em;">
+            <h5 class="card-title avd text-center">Average Watch Duration</h5>
+            <div class="icon-info tooltips">
+              <i class="material-icons">info_outline</i><span class="tooltipstext">
+                The average duration users watch a video, given as a percentage. An average watch duration of 50% would
+                mean on average, users watch half of the video.
+              </span>
+            </div>
+          </div>
+          <div class="card-body">
+            <p class="card-text">{{(watchDuration * 100).toFixed(1)}}%</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="mt-5">
+      <div class="d-sm-flex flex-sm-column justify-content-sm-center align-self-sm-center">
+        <div class="align-self-sm-center" id="userEngTable">
+          <h2 class="text-center">User Engagement</h2>
+          <div class="table-responsive">
+            <table matSort (matSortChange)="sortMedia($event)" class="table mt-5 engagement-table">
+              <thead>
+                <tr>
+                  <th mat-sort-header="uid" scope="col">United ID</th>
+                  <th mat-sort-header="fName" scope="col">First Name</th>
+                  <th mat-sort-header="lName" scope="col">Last Name</th>
+                  <th mat-sort-header="email" scope="col">Email</th>
+                  <th mat-sort-header="jobCode" scope="col">Job Code</th>
+                  <th mat-sort-header="department" scope="col">Department</th>
+                  <th mat-sort-header="location" scope="col">Location</th>
+                  <th mat-sort-header="rating" scope="col">Rating</th>
+                  <th mat-sort-header="watchLength" *ngIf="this.type == 'mp4'" scope="col">Watch Length</th>
+                  <th mat-sort-header="views" scope="col">Views</th>
+                  <th mat-sort-header="lastViewed" scope="col">Last Viewed</th>
+                  <th scope="col">Run Report</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr
+                  *ngFor="let rating of sortedData | paginate: { itemsPerPage: perPageCount, currentPage: p }; let i = index">
+                  <th scope="row">{{rating.uid}}</th>
+                  <td>{{rating.firstName}}</td>
+                  <td>{{rating.lastName}}</td>
+                  <td>{{rating.email}}</td>
+                  <td>{{rating.jobRoleCode}}</td>
+                  <td>{{rating.department}}</td>
+                  <td>{{rating.locationCode}}</td>
+                  <td *ngIf="rating.like == true"><i class="material-icons like">thumb_up</i></td>
+                  <td *ngIf="rating.like == false"><i class="material-icons dislike">thumb_down</i></td>
+                  <td *ngIf="rating.like == null"><i class="material-icons">not_interested</i></td>
+                  <td *ngIf="this.type == 'mp4'">{{(rating.watchLength * 100).toFixed(2)}}%</td>
+                  <td>{{rating.clickedAmount}}</td>
+                  <td>{{rating.updatedAt}}</td>
+                  <td><i routerLink="/report/user/{{encodeVal(rating.uid)}}"
+                      class="material-icons point">insert_chart</i></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <div class="pagNation mb-5">
+          <pagination-controls class="my-pagination mt-3" (click)="updateIndex(p)" (pageChange)="p = $event">
+          </pagination-controls>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div *ngIf="this.reportType == 'group'">
+    <div class="mt-5">
+      <div class="d-sm-flex flex-sm-column justify-content-sm-center align-self-sm-center">
+        <div class="align-self-sm-center" id="userEngTable">
+          <h2 class="text-center">Group User Engagement</h2>
+          <div class="table-responsive">
+            <table matSort (matSortChange)="sortGroup($event)" class="table mt-5 engagement-table">
+              <thead>
+                <tr>
+                  <th mat-sort-header="uid" scope="col">United ID</th>
+                  <th mat-sort-header="fName" scope="col">First Name</th>
+                  <th mat-sort-header="lName" scope="col">Last Name</th>
+                  <th mat-sort-header="jobCode" scope="col">Job Code</th>
+                  <th mat-sort-header="department" scope="col">Department</th>
+                  <th mat-sort-header="location" scope="col">Location</th>
+                  <th mat-sort-header="costCenter" scope="col">Cost Center</th>
+                  <th mat-sort-header="rating" scope="col">Rating</th>
+                  <th mat-sort-header="views" scope="col">Views</th>
+                  <th mat-sort-header="lastViewed" scope="col">Last Viewed</th>
+                  <th mat-sort-header="mediaID" scope="col">Media ID</th>
+                  <th mat-sort-header="mediaTitle" scope="col">Media Title</th>
+                  <th mat-sort-header="mediaType" scope="col">Media Type</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr
+                  *ngFor="let info of sortedData | paginate: { itemsPerPage: perPageCount, currentPage: p }; let i = index">
+                  <th scope="row">{{info.uid}}</th>
+                  <td>{{info.firstName}}</td>
+                  <td>{{info.lastName}}</td>
+                  <td>{{info.jobRoleCode}}</td>
+                  <td>{{info.department}}</td>
+                  <td>{{info.locationCode}}</td>
+                  <td>{{info.costCenter}} - {{info.costCenterDesc}}</td>
+                  <td *ngIf="info.like == true"><i class="material-icons like">thumb_up</i></td>
+                  <td *ngIf="info.like == false"><i class="material-icons dislike">thumb_down</i></td>
+                  <td *ngIf="info.like == null"><i class="material-icons">not_interested</i></td>
+                  <td>{{info.clickedAmount}}</td>
+                  <td>{{info.updatedAt}}</td>
+                  <td>{{info.mediaId}}</td>
+                  <td>{{info.title}}</td>
+                  <td *ngIf="info.mediaTypeID == 1">PDF</td>
+                  <td *ngIf="info.mediaTypeID == 2">MP4</td>
+                  <td *ngIf="info.mediaTypeID == 3">HTML</td>
+                  <td *ngIf="info.mediaTypeID == 4">CourseTrainingManual</td>
+                  <td *ngIf="info.mediaTypeID == 5">TechTalk</td>
+                  <td *ngIf="info.mediaTypeID == 6">ExternalLink</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <div class="pagNation mb-5">
+          <pagination-controls class="my-pagination mt-3" (click)="updateIndex(p)" (pageChange)="p = $event">
+          </pagination-controls>
+        </div>
+      </div>
+    </div>
+  </div>

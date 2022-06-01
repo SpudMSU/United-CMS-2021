@@ -1,0 +1,41 @@
+<div class="row" style="min-height: 80vh">
+  <div class="col">
+    <h2 class="mb-2 mt-2">Administer Media</h2>
+    <div class="searchWindow">
+      <p>Search for a media item to edit</p>
+      <div class="search">
+        <input type="text" class="Term" [(ngModel)]="searchText" placeholder="Media Keywords" (keyup.enter)="searchMedia()">
+        <button type="submit" class="search-button" (click)="searchMedia()">
+          <img src="{{SitePath}}/assets/images/icon.png">
+        </button>
+      </div>
+      <div>
+        <p class="no-search" *ngIf="hasSearchError">{{searchErrorText}}</p>
+      </div>
+    </div>
+    <div class="d-flex justify-content-center">
+      <table class="table media-table">
+        <thead>
+          <tr>
+            <th scope="col">Title</th>
+            <th scope="col">Type</th>
+            <th scope="col">Date Created</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let media of returnedMedia | paginate: { itemsPerPage: perPageCount, currentPage: p }; let i = index">
+            <td scope="row">{{media.title}}</td>
+            <td scope="row">{{mediaTypeString(media.mediaTypeID)}}</td>
+            <td scope="row">{{convertUTCDateToLocalDate(media["createdAt"])}}</td>
+            <td><button class="material-icons editanddelete" routerLink="/upload/{{media.mediaID}}">edit</button></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="pagNation mb-5">
+      <pagination-controls class="my-pagination mt-3" (click)="updateIndexPage(p)" (pageChange)="p = $event"></pagination-controls>
+    </div>
+  </div>
+
+
+</div>

@@ -1,0 +1,62 @@
+<div class="container">
+  <div class="row mt-3 mb-3">
+    <div class="col-md-12">
+      <h3 class="text-center">Add a Channel</h3>
+    </div>
+  </div>
+  <div class="edit">
+
+    <form #editform="ngForm">
+      <div class="addc">
+        <label class="lab">Channel Title</label>
+        <input class="form-control" type="text" id="ctitle" name="ctitle" [(ngModel)]="inputField"
+               (click)="ClearForInput()" placeholder="Enter channel title" required />
+        <p>{{errormessage}}</p>
+        <!--<button class="mt-3 btn btn-success" (click)="addchannel()">Submit</button>-->
+      </div>
+
+    </form>
+
+    <div class="searchWindow">
+      <p>Search for a media item to add</p>
+      <div class="search">
+        <input type="text" class="Term" [(ngModel)]="searchText" placeholder="Media Title" (keyup.enter)="searchMedia()">
+        <button type="submit" class="search-button" (click)="searchMedia()">
+          <img src="{{SitePath}}/assets/images/icon.png" width="16" height="16">
+        </button>
+      </div>
+      <div>
+        <p class="no-search" *ngIf="noSearchInput">Search requires input!</p>
+      </div>
+    </div>
+    <div class="d-flex justify-content-center">
+      <table class="table media-table">
+        <thead>
+          <tr>
+            <th scope="col"></th>
+            <th scope="col">Title</th>
+            <th scope="col">Type</th>
+            <th scope="col">Date Created</th>
+
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let media of returnedMedia | paginate: { itemsPerPage: perPageCount, currentPage: p }; let i = index">
+            <td><input type="checkbox" [(ngModel)]="media.checked" (click)="listchecked(media)"></td>
+            <td scope="row">{{media.title}}</td>
+            <td scope="row">{{mediaTypeString(media.mediaTypeID)}}</td>
+            <td scope="row">{{convertUTCDateToLocalDate(media["createdAt"])}}</td>
+            <!--<td><button class="material-icons editanddelete" (click)="selectMedia(media)">edit</button></td>-->
+
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+
+    <button class="mt-3 btn btn-success" (click)="addchannel()">Submit</button>
+  </div>
+</div>
+
+
+

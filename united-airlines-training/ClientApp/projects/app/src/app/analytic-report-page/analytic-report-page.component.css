@@ -1,0 +1,253 @@
+
+
+.my-pagination /deep/ .ngx-pagination .current {
+  background: #0033A0;
+}
+
+.pagNation {
+  margin-left: 12em;
+}
+
+.desc {
+    font-size: 16px;
+}
+
+.like {
+    color: green;
+}
+
+.dislike {
+  color: red;
+}
+
+.point {
+    cursor: pointer;
+}
+
+
+.mid {
+  max-width: 21em;
+}
+
+
+.half-table {
+    width: 50em;
+}
+
+.resize {
+  width: 300px;
+  height: auto;
+}
+
+.margin-diff-left-sm {
+  margin-left: 4em;
+}
+
+
+.margin-diff-left {
+  margin-left: 8em;
+}
+
+.margin-diff-left-lg {
+  margin-left: 16em;
+}
+
+.small-height {
+    line-height: 0 !important;
+    font-size: 16px;
+}
+
+.icon-size {
+    font-size: 2rem;
+}
+
+.icon-info {
+  font-size: 1.4rem;
+  position: absolute;
+  right: 2%;
+  top: 2%;
+}
+
+.icon-size-sm {
+  font-size: 1.2rem;
+}
+
+.icon-big-size {
+  font-size: 10rem;
+}
+
+
+.border-primary {
+  border-color: #0033A0 !important;
+}
+
+.card-header {
+  background-color: #0033A0 !important;
+  color: white;
+}
+
+.card-text {
+    font-size: 36px;
+}
+
+.card-title {
+  font-size: 1rem;
+  margin-top: 1em;
+}
+
+.avd {
+  font-size: 0.9rem !important;
+}
+
+.card-body {
+  line-height: 0.6;
+}
+
+#input_section {
+  margin: 8px 8px 8px 0;
+  width: 100%;
+  text-align: center;
+}
+
+.full-width {
+  width: 80px auto;
+}
+
+.mat-form-field{
+    margin: 8px 8px 8px 0;
+}
+
+#filter-form {
+  min-width: 50px;
+  max-width: 500px;
+  width: 100%;
+  text-align: center;
+  margin: 8px 8px 8px 0;
+}
+
+.tooltips .tooltipstext {
+  visibility: hidden;
+  width: 350px;
+  background-color: #555;
+  color: #fff;
+  text-align: center;
+  border-radius: 6px;
+  padding: 5px 0;
+  position: absolute;
+  z-index: 1;
+  bottom: 125%;
+  left: 30%;
+  margin-left: -175px;
+  opacity: 0;
+  transition: opacity 0.3s;
+  font-size: 14px;
+}
+
+.tooltips .tooltipstext::after {
+  content: "";
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  border-width: 5px;
+  border-style: solid;
+  border-color: #555 transparent transparent transparent;
+}
+
+.tooltips:hover .tooltipstext {
+  visibility: visible;
+  opacity: 0.9;
+}
+
+#userEngTable {
+    max-width: 100%;
+}
+
+/*Small (xs) devices (landscape phones, 100px and up)*/
+@media (min-width: 100px) {
+  .margin-diff-left {
+    margin-left: 0em;
+  }
+
+  .margin-diff-left-lg {
+    margin-left: 0em;
+  }
+
+  .margin-diff-left-sm {
+    margin-left: 0em;
+  }
+
+  .half-table {
+    width: 100%;
+  }
+
+  .pagNation {
+      margin: 20px auto;
+  }
+
+  .mid {
+    max-width: 100em;
+  }
+
+}
+
+
+/*Small (sm) devices (landscape phones, 576px and up)*/
+@media (min-width: 576px) {
+}
+
+/*Medium (md) devices (tablets, 768px and up)*/
+@media (min-width: 768px) {
+  .half-table {
+    width: 40em;
+  }
+}
+
+/*Large (lg) devices (desktops, 992px and up)*/
+@media (min-width: 992px) {
+  .margin-diff-left {
+    margin-left: 3em;
+  }
+}
+
+/*Extra (xl) large devices (large desktops, 1200px and up)*/
+@media (min-width: 1200px) {
+  .margin-diff-left {
+    margin-left: 4em;
+  }
+  .half-table {
+    width: 40em;
+  }
+}
+
+
+/*Extra (xl) large devices (large desktops, 1400px and up)*/
+@media (min-width: 1400px) {
+  .margin-diff-left {
+    margin-left: 8em;
+  }
+
+  .margin-diff-left-lg {
+    margin-left: 16em;
+  }
+
+  .margin-diff-left-sm {
+    margin-left: 4em;
+  }
+
+  .mid {
+    max-width: 21em;
+  }
+
+  .half-table {
+    width: 40em;
+  }
+  .engagement-table {
+      width: 100em;
+  }
+}
+
+@media (min-width: 1700px) {
+  .half-table {
+    width: 50em;
+  }
+}

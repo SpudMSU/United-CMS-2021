@@ -1,0 +1,81 @@
+.lab {
+  font-weight: 500;
+}
+
+.comment-table {
+  width: 100%;
+  margin-top: 2em;
+}
+
+.margin-diff-left {
+  margin-left: 10%;
+}
+
+
+.form-control:focus {
+  border-color: #00B2A9;
+  box-shadow: 0px 1px 1px rgba(0, 178, 169, 1) inset, 0px 0px 8px rgba(0, 178, 169, 1);
+}
+
+
+button {
+  background-color: #00B2A9;
+  border: none;
+  color: white;
+  margin: 1px;
+}
+
+button:hover {
+  background-color: white;
+  color: black;
+}
+
+button:focus {
+  box-shadow: 0px 1px 1px rgba(0, 178, 169, 1) inset, 0px 0px 8px rgba(0, 178, 169, 1);
+}
+
+
+.pagNation {
+  margin-left: 10%;
+}
+
+.my-pagination /deep/ .ngx-pagination .current {
+  background: #00B2A9;
+}
+
+
+.deleteComment {
+  font-size: small;
+  color: indianred;
+  float: right;
+  top: 0;
+}
+
+.deleteComment:hover {
+  cursor: pointer;
+  font-weight: 600;
+}
+
+
+.approveComment {
+  font-size: small;
+  color: green;
+  top: 0;
+  left: 0;
+}
+
+.approveComment:hover {
+  cursor: pointer;
+  font-weight: 600;
+}
+
+#tableContainerDiv {
+    margin-left: 20px;
+    margin-right: 20px;
+}
+
+@media (max-width: 575px) {
+  .comment-table {
+    
+  }
+}

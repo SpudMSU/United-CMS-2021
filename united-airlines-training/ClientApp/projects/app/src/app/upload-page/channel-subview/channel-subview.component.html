@@ -1,0 +1,31 @@
+<div class="row">
+  <div class="col channelCol offset-{{level}}">
+    <div class="channelWrapper" (click)="onChannelClick()">
+      <div class="channelName">
+        {{channel.title}}
+      </div>
+      <div class="channelCheck" *ngIf="isSelected">
+        <span class="material-icons">
+          check
+        </span>
+      </div>
+    </div>
+    <div class="channelArrowWrapper" *ngIf="hasChildren" (click)="onChildArrowClicked($event)">
+      <span id="arrow_image" class="material-icons channelArrow">
+        keyboard_arrow_down
+      </span>
+    </div>
+  </div>
+</div>
+<div *ngIf="hasChildren" [hidden]="!childrenViewable">
+  <app-channel-subview *ngFor="let child of channel.child"
+                       [channel]="child"
+                       [level]="level + 1"
+                       [submissionSubject]="submissionSubject"
+                       [selectedChannelsSubject]="selectedChannelsSubject"
+                       [selectedChannels]="selectedChannels"
+                       (channelAdded)="onChildChannelAdded($event)"
+                       (channelRemoved)="onChildChannelRemoved($event)"></app-channel-subview>
+</div>
+
+

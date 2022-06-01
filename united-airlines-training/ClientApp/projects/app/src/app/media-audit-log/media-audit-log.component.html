@@ -1,0 +1,56 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-12 text-center mt-4">
+      <h2 class="mb-5">Media Audit Log</h2>
+    </div>
+  </div>
+</div>
+
+
+<div>
+  <div class="margin-diff-left">
+    <form class="">
+      <div class="form-group row">
+        <div class="col-xs-2">
+          <label class="lab">Filter by title: </label>
+          <select class="form-control" [(ngModel)]="mediaTitle" name="attributeOption">
+            <option *ngFor="let media of mediaOptions">{{media.title}}</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-group row">
+        <div class="col-xs-2">
+          <label class="lab">Filter by User Role: </label>
+          <select class="form-control" [(ngModel)]="status" name="attributeOption">
+            <option *ngFor="let item of statusOptions">{{item.name}}</option>
+          </select>
+        </div>
+      </div>
+      <div class="row">
+        <button class="btn btn-primary" type="submit" (click)="searchResults()">Search</button>
+      </div>
+    </form>
+
+  </div>
+  <div class="d-flex justify-content-center" id="tableContainerDiv">
+    <div class="table-responsive">
+      <table class="table comment-table">
+        <thead>
+          <tr>
+            <th scope="col">Media ID</th>
+            <th scope="col">User ID</th>
+            <th scope="col">Change</th>
+            <th scope="col">Description</th>
+            <th scope="col">Comment Date</th>
+            <th scope="col">Action</th>
+          </tr>
+        </thead>
+      </table>
+    </div>
+
+  </div>
+  <div class="pagNation mb-5">
+    <pagination-controls class="my-pagination mt-3" (click)="updateIndexPage(p)" (pageChange)="p = $event"></pagination-controls>
+  </div>
+  <h3 class="text-center mb-5" *ngIf="noResults && searched">No comments found. Please try another search.</h3>
+</div>

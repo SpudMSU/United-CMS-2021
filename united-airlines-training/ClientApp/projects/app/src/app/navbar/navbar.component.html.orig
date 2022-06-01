@@ -1,0 +1,23 @@
+<div class="Nav">
+  <ul>
+    <li><a [routerLink]="['/home']" class="homepage">Homepage</a></li>
+    <li><a [routerLink]="['/category']" class="category">Channels</a></li>
+    <li><a [routerLink]="['/feedback']" class="feedback">Feedback</a></li>
+    <li><a [routerLink]="['/help']" class="help">Help</a></li>
+    <li><a [routerLink]="['/aboutus']" class="aboutus">About Us</a></li>
+    <li *ngIf="roleCodeLevel > 1"><a [routerLink]="['/analytics']">Analytics</a></li>
+    <li class="dropdown" *ngIf="roleCodeLevel >= 3">
+      <button class="dropbtn">Admin</button>
+      <div class="dropdown-content">
+        <a [routerLink]="['/admin/media']">Administer Media</a>
+<<<<<<< HEAD
+        <a [routerLink]="['/admin/user']">Administer Users</a>
+        <a [routerLink]="['/upload']">Upload New Media</a>
+=======
+        <a *ngIf="roleCodeLevel >= 4" [routerLink]="['/admin/user']">Administer User Roles</a>
+        <a *ngIf="roleCodeLevel >= 4" [routerLink]="['/upload']">Upload New Media</a>
+>>>>>>> 05ec52c0fd7078444e9ecdeb5efa07d6104e4600
+      </div>
+    </li>
+  </ul>
+</div>

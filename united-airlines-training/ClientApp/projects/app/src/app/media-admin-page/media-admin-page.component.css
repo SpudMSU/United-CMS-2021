@@ -1,0 +1,289 @@
+
+/* Search Bar */
+.search {
+  width: 100%;
+  position: relative;
+  display: flex;
+  margin: 0 auto;
+}
+
+.Term {
+  width: 100%;
+  border: 2px solid #B6B8DC;
+  border-right: none;
+  padding: 5px;
+  height: 40px;
+  border-radius: 5px 0 0 5px;
+  color: #B6B8DC;
+}
+
+  .Term:focus {
+    color: black;
+  }
+
+.search-button {
+  width: 40px;
+  height: 40px;
+  border: 1px solid #B6B8DC;
+  background: #B6B8DC;
+  text-align: center;
+  color: #fff;
+  border-radius: 0 5px 5px 0;
+  cursor: pointer;
+  font-size: 20px;
+}
+
+  .search-button img {
+    display: flex;
+    height: 30px;
+    width: 30px;
+    margin: 0 auto;
+  }
+
+.search-bar {
+  width: 40%;
+  position: relative;
+  display: block;
+  margin-left: auto;
+  margin-right: 15px;
+  padding: 15px;
+}
+
+.no-search {
+  color: maroon;
+}
+
+/* results table */
+.media-table {
+  width: 100%;
+  table-layout: fixed;
+  border: 0 0 0 0;
+  border-spacing: 0 0 0 0;
+  box-sizing: initial;
+  margin: 0 0 0 0;
+  padding: 0 0 0 0;
+  word-wrap: break-word;
+}
+
+button {
+  background-color: #00B2A9;
+  border: none;
+  color: white;
+  margin: 1px;
+}
+
+  button:hover {
+    background-color: white;
+    color: black;
+  }
+
+  button:focus {
+    box-shadow: 0px 1px 1px rgba(0, 178, 169, 1) inset, 0px 0px 8px rgba(0, 178, 169, 1);
+  }
+
+/* page dividing */
+.column {
+  width: 50%;
+  min-height: 100%;
+}
+
+/* Middle Divider */
+#col2 {
+  padding-top: 4px;
+  border-left: 4px solid #0033A0;
+  min-height: 100%;
+}
+
+.content-right, .content-left {
+  margin-top: 0.1%;
+  margin-left: 2%;
+  margin-right: 2%;
+  margin-bottom: 0.1%;
+  padding-left: 1%;
+  padding-right: 1%;
+}
+.content-right {
+  text-align: center;
+}
+
+/* Right Side: Editing */
+.channelList {
+  height: 200px;
+  overflow-y: scroll;
+  list-style-type: none;
+}
+.name-button {
+  justify-content: space-between;
+}
+.add-button {
+  background-color: initial;
+  border: none;
+  color: forestgreen;
+  margin: 1px;
+}
+  .add-button:hover {
+    background-color: white;
+    color: black;
+  }
+.remove-button {
+  background-color: initial;
+  border: none;
+  color: maroon;
+}
+
+.keyword {
+  display: inline;
+  white-space: nowrap;
+  border-radius: 5px;
+  border: 2px solid #0033A0;
+  padding: 4px;
+  margin: 2px;
+}
+
+ul {
+  padding-left: 0;
+  list-style-type: none; /* Remove bullet points*/
+}
+
+li {
+    margin-top: 2px;
+    margin-bottom: 2px;
+}
+
+#editForm label {
+  display: block;
+  margin: 10px;
+}
+
+.save-changes {
+  font-size: larger;
+  float: right;
+  flex: 0 0 auto;
+  justify-content: flex-end;
+}
+.save-changes button {
+  border-radius: 15px;
+  background-color: #0033A0;
+}
+.btn-danger {
+  font-size: larger;
+  background-color: maroon;
+  min-height: 22px;
+  border-radius: 15px;
+}
+.btn-success {
+  font-size: larger;
+  background-color: forestgreen;
+  min-height: 22px;
+  border-radius: 15px;
+}
+
+.horizontal-list {
+  list-style-type: none;
+  overflow: hidden;
+  display: flex;
+  flex: 1 0 auto;
+  /*display: inline;*/
+}
+.horizontal-list li {
+  display: flex;
+}
+
+.vertical-item {
+  flex-flow: column;
+  width: 100%;
+  border-radius: 25px;
+  border: 2px solid #0033A0;
+  padding: 20px;
+}
+
+.blue-border {
+  border-radius: 25px;
+  border: 2px solid #0033A0;
+  padding: 20px;
+  margin-bottom: 8px;
+}
+
+.left-pair {
+  text-align: center;
+  width: 46%;
+  margin-right: 3%;
+  margin-left: 1%;
+  flex: 1 0 auto;
+  justify-content: flex-start;
+}
+
+.right-pair {
+  text-align: center;
+  width: 46%;
+  margin-right: 1%;
+  margin-left: 3%;
+  flex: 0 0 auto;
+  justify-content: flex-end;
+}
+
+.left-third {
+  width: 29%;
+  margin-right: 3%;
+  margin-left: 1%;
+  display: flex;
+  align-items: center;
+  flex-flow: row-reverse;
+  font-weight: bold;
+  font-size: large;
+}
+
+.right-two-thirds {
+  text-align: center;
+  width: 63%;
+  margin-right: 1%;
+  margin-left: 3%;
+}
+
+textarea {
+  border: 2px solid #0033A0;
+}
+
+#curTitle {
+  border: 2px solid #0033A0;
+  width: 80%;
+  margin-left: 1%;
+  margin-right: 1%;
+}
+
+.flag-table {
+  margin: auto;
+}
+  .flag-table textarea {
+    width: 98%;
+    margin-left: 1%;
+    margin-right: 1%;
+  }
+
+/*Ipads*/
+@media (max-width: 1132px) {
+  .column {
+    width: 100%;
+  }
+  /* Middle Divider */
+  #col2 {
+    border-top: 4px solid #0033A0;
+    border-left: none;
+  }
+}
+
+/*Phones*/
+@media (max-width: 575px) {
+  .column {
+    width: 100%;
+  }
+  .save-changes {
+    font-size: medium;
+  }
+  .btn-danger {
+    font-size: medium;
+  }
+  .btn-success {
+    font-size: medium;
+  }
+}

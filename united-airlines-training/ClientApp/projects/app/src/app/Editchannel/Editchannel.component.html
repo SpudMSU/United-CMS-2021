@@ -1,0 +1,98 @@
+<div class="container">
+  <div class="row mt-3 mb-3">
+    <div class="col-md-12">
+      <h3 class="text-center">Edit a Channel</h3>
+    </div>
+  </div>
+
+  <div class="edit">
+
+    <form #editform="ngForm">
+
+      <button class="mb-3 btn" (click)="backtoparent()">Back</button>
+
+      <div class="editc">
+        <p class="lab">Channel IP: {{ec.channelID}}<p>
+          <label class="lab">Channel Title</label>
+          <input class="form-control" type="text" id="ctitle" name="ctitle" [(ngModel)]="ec.title"
+                 (click)="ClearForInput()" placeholder="Enter channel title" required />
+
+          <button class="btn sub mt-3" (click)="editchannel()">Submit</button> <!--edit main channel name-->
+
+      </div>
+
+
+      <div class="addchild">
+        <h3 class="lab">Child Channels: level {{parentlevel}}</h3>
+        <button class="mb-3 btn" (click)="openaddDialog()" *ngIf="parentlevel < 3">Add</button> <!--add a child channel-->
+        <div *ngFor="let channelItem of childlist" class="card mt-3">
+          <div class="card-body">
+            <h5 class="mb-3"> {{channelItem.title}} </h5>
+            <!--<button class="btn edit-button mr-1" (click)="openeditDialog(channelItem.channelID)">Edit</button>-->
+            <a class="btn edit-button mr-1" routerLink="/editchannel/{{channelItem.channelID}}/{{newlevel}}">Edit</a>
+            <button class="btn del" (click)="deletenestedchannel(channelItem)">Delete</button><!--deleting a child channel-->
+          </div>
+        </div>
+
+
+      </div>
+
+      <!--    <div>
+      <label>ChildChannel Title</label>
+      <input type="text" id="childtitle" name="childtitle" [(ngModel)]="childc.title"
+             (click)="ClearForInput()" placeholder="Enter child Title" required />
+
+      <button (click)="enterchildtitle()">Submit</button>
+    </div>-->
+      <!--<div>
+      <label>EditChildChannel Title</label>
+      <input type="text" id="editchildtitle" name="editchildtitle" [(ngModel)]="editchildc.title"
+             (click)="ClearForInput()" placeholder="edit child Title" required />
+
+      <button (click)="editchildtitle()">Submit</button>
+    </div>-->
+
+    </form>
+
+    <div class="searchWindow">
+      <p>Search for a media item to add</p>
+      <div class="search">
+        <input type="text" class="Term" [(ngModel)]="searchText" placeholder="Media Title" (keyup.enter)="searchMedia()">
+        <button type="submit" class="search-button" (click)="searchMedia()">
+          <img src="/assets/images/icon.png" width="16" height="16">
+        </button>
+      </div>
+      <div>
+        <p class="no-search" *ngIf="noSearchInput">Search requires input!</p>
+      </div>
+    </div>
+    <div class="d-flex justify-content-center">
+      <table class="table media-table">
+        <thead>
+          <tr>
+            <th scope="col"></th>
+            <th scope="col">Title</th>
+            <th scope="col">Type</th>
+            <th scope="col">Date Created</th>
+
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let media of returnedMedia | paginate: { itemsPerPage: perPageCount, currentPage: p }; let i = index">
+            <td><input type="checkbox" [(ngModel)]="media.checked" (click)="listchecked($event, media)"></td>
+            <td scope="row">{{media.title}}</td>
+            <td scope="row">{{mediaTypeString(media.mediaTypeID)}}</td>
+            <td scope="row">{{convertUTCDateToLocalDate(media["createdAt"])}}</td>
+            <!--<td><button class="material-icons editanddelete" (click)="selectMedia(media)">edit</button></td>-->
+
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <button class="btn sub mt-3" (click)="submitChanges()">Submit</button> <!--change media-->
+
+  </div>
+</div>
+
+

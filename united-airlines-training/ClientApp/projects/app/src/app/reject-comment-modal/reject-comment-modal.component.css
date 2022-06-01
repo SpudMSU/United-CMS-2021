@@ -1,0 +1,16 @@
+.modal-title{
+    text-align: center;
+}
+
+.submitButton {
+    margin: auto 5px;
+}
+
+.formElement {
+    margin: 10px auto;
+}
+
+.dropdownLabel {
+    display: block;
+    margin: 0px;
+}

@@ -1,0 +1,155 @@
+<!-- Main -->
+<div class="Main">
+  <!-- Hot -->
+  <div class="cate">
+    <div class="categoryHeader">
+      <h1>Hot Media</h1>
+      <!--<a [routerLink]="['/category/latest']" class="box">Latest Posts</a>-->
+    </div>
+    <div class="lst">
+      <ul class="mediaList" *ngFor="let mediaItem of hot">
+        <li>
+          <div class="mediaLink">
+            <!--(click)=""-->
+            <img class="thumbnail" routerLink="/media/{{mediaItem.mediaID}}" src="{{SitePath + mediaItem.thumbnailPath}}" width="160" height="120" />
+            <h6 title="{{mediaItem.title}}" routerLink="/media/{{mediaItem.mediaID}}">{{mediaItem.title}}</h6>
+            <footer>
+              <!----button *ngIf="mediaItem.mediaTypeID < 4" (click)="openDialog();">Pop Out</!-button>-->
+              <span *ngIf="mediaItem.mediaTypeID == 1"><i title="PDF" class="material-icons icon-size">library_books</i>PDF</span>
+              <span *ngIf="mediaItem.mediaTypeID == 2"><i title="MP4 Video" class="material-icons icon-size">ondemand_video</i>Video</span>
+              <span *ngIf="mediaItem.mediaTypeID == 3"><i title="HTML" class="material-icons icon-size">video_label</i>HTML</span>
+              <span *ngIf="mediaItem.mediaTypeID == 4"><i title="Training Manual" class="material-icons icon-size">folder</i>Manual</span>
+              <div *ngIf="mediaItem.mediaTypeID == 5" class="footer-content"><i title="Training Manual" class="material-icons badge-icon">person</i><div class="footer-title">Distance Learning</div></div>
+
+              <!--<span *ngIf="mediaItem.mediaTypeID == 5"><i title="Distance Learning" class="material-icons icon-size">person</i>Dist. Learn</span>-->
+              <span *ngIf="mediaItem.mediaTypeID == 6"><i title="External Link" class="material-icons icon-size">language</i>Link</span>
+            </footer>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- Latest Posts -->
+  <div class="cate">
+    <div class="categoryHeader">
+      <h1>Latest Media</h1>
+      <!--<a [routerLink]="['/category/latest']" class="box">Latest Posts</a>-->
+    </div>
+
+    <div class="lst">
+      <ul class="mediaList" *ngFor="let mediaItem of latest">
+        <li>
+          <div class="mediaLink">
+            <!--(click)=""-->
+            <img class="thumbnail" routerLink="/media/{{mediaItem.mediaID}}" src="{{SitePath + mediaItem.thumbnailPath}}" width="160" height="120" />
+            <h6 title="{{mediaItem.title}}" routerLink="/media/{{mediaItem.mediaID}}">{{mediaItem.title}}</h6>
+            <footer>
+              <!----button *ngIf="mediaItem.mediaTypeID < 4" (click)="openDialog();">Pop Out</!-button>-->
+              <span *ngIf="mediaItem.mediaTypeID == 1"><i title="PDF" class="material-icons icon-size">library_books</i>PDF</span>
+              <span *ngIf="mediaItem.mediaTypeID == 2"><i title="MP4 Video" class="material-icons icon-size">ondemand_video</i>Video</span>
+              <span *ngIf="mediaItem.mediaTypeID == 3"><i title="HTML" class="material-icons icon-size">video_label</i>HTML</span>
+              <span *ngIf="mediaItem.mediaTypeID == 4"><i title="Training Manual" class="material-icons icon-size">folder</i>Manual</span>
+              <div *ngIf="mediaItem.mediaTypeID == 5" class="footer-content"><i title="Training Manual" class="material-icons badge-icon">person</i><div class="footer-title">Distance Learning</div></div>
+
+              <!--<span *ngIf="mediaItem.mediaTypeID == 5"><i title="Distance Learning" class="material-icons icon-size">person</i>Distance Learning</span>-->
+              <span *ngIf="mediaItem.mediaTypeID == 6"><i title="External Link" class="material-icons icon-size">language</i>Link</span>
+            </footer>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+
+
+  <!-- Recommended -->
+  <div class="cate">
+    <div class="categoryHeader">
+      <h1>Recommended Media</h1>
+      <!--<a [routerLink]="['/category/latest']" class="box">Latest Posts</a>-->
+    </div>
+    <div class="lst">
+      <ul class="mediaList" *ngFor="let mediaItem of recommended">
+        <li>
+          <div class="mediaLink">
+            <!--(click)=""-->
+            <img class="thumbnail" routerLink="/media/{{mediaItem.mediaID}}" src="{{SitePath + mediaItem.thumbnailPath}}" width="160" height="120" />
+            <h6 title="{{mediaItem.title}}" routerLink="/media/{{mediaItem.mediaID}}">{{mediaItem.title}}</h6>
+            <footer>
+              <!--<button *ngIf="mediaItem.mediaTypeID < 4" (click)="openDialog();">Pop Out</button>-->
+              <span *ngIf="mediaItem.mediaTypeID == 1"><i title="PDF" class="material-icons icon-size">library_books</i>PDF</span>
+              <span *ngIf="mediaItem.mediaTypeID == 2"><i title="MP4 Video" class="material-icons icon-size">ondemand_video</i>Video</span>
+              <span *ngIf="mediaItem.mediaTypeID == 3"><i title="HTML" class="material-icons icon-size">video_label</i>HTML</span>
+              <span *ngIf="mediaItem.mediaTypeID == 4"><i title="Training Manual" class="material-icons icon-size">folder</i>Manual</span>
+              <div *ngIf="mediaItem.mediaTypeID == 5" class="footer-content"><i title="Training Manual" class="material-icons badge-icon">person</i><div class="footer-title">Distance Learning</div></div>
+              <!--<span *ngIf="mediaItem.mediaTypeID == 5"><i title="Distance Learning" class="material-icons icon-size">person</i>Dist. Learn</span>-->
+              <span *ngIf="mediaItem.mediaTypeID == 6"><i title="External Link" class="material-icons icon-size">language</i>Link</span>
+            </footer>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+
+  <!-- Trending -->
+  <div class="cate space">
+    <div class="categoryHeader">
+      <h1>Trending Media</h1>
+      <!--<a [routerLink]="['/category/latest']" class="box">Latest Posts</a>-->
+    </div>
+    <div class="lst">
+      <ul class="mediaList" *ngFor="let mediaItem of trending">
+        <li>
+          <div class="mediaLink">
+            <!--(click)=""-->
+            <img routerLink="/media/{{mediaItem.mediaID}}" class="thumbnail" src="{{SitePath + mediaItem.thumbnailPath}}" width="160" height="120" />
+            <h6 title="{{mediaItem.title}}" routerLink="/media/{{mediaItem.mediaID}}">{{mediaItem.title}}</h6>
+            <footer>
+              <!--<button *ngIf="mediaItem.mediaTypeID < 4" (click)="openDialog();">Pop Out</button>-->
+              <span *ngIf="mediaItem.mediaTypeID == 1"><i title="PDF" class="material-icons icon-size">library_books</i>PDF</span>
+              <span *ngIf="mediaItem.mediaTypeID == 2"><i title="MP4 Video" class="material-icons icon-size">ondemand_video</i>Video</span>
+              <span *ngIf="mediaItem.mediaTypeID == 3"><i title="HTML" class="material-icons icon-size">video_label</i>HTML</span>
+              <span *ngIf="mediaItem.mediaTypeID == 4"><i title="Training Manual" class="material-icons icon-size">folder</i>Manual</span>
+              <div *ngIf="mediaItem.mediaTypeID == 5" class="footer-content"><i title="Training Manual" class="material-icons badge-icon">person</i><div class="footer-title">Distance Learning</div></div>
+
+              <!--<span *ngIf="mediaItem.mediaTypeID == 5"><i title="Distance Learning" class="material-icons icon-size">person</i>Distance Learning</span>-->
+              <span *ngIf="mediaItem.mediaTypeID == 6"><i title="External Link" class="material-icons icon-size">language</i>Link</span>
+            </footer>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- Bookmarked Media -->
+  <!--<div class="cate space">
+    <div class="categoryHeader">
+      <h1>Bookmarked Media</h1>-->
+      <!--<a [routerLink]="['/category/latest']" class="box">Latest Posts</a>-->
+    <!--</div>
+    <div class="lst">
+      <ul class="mediaList" *ngFor="let mediaItem of bookmarked">
+        <li>
+          <div class="mediaLink">
+            (click)=""
+            <img routerLink="/media/{{mediaItem.mediaID}}" class="thumbnail" src="{{SitePath + mediaItem.thumbnailPath}}" width="160" height="120" />
+            <h6 title="{{mediaItem.title}}" routerLink="/media/{{mediaItem.mediaID}}">{{mediaItem.title}}</h6>
+            <footer>
+              <button *ngIf="mediaItem.mediaTypeID < 4" (click)="openDialog();">Pop Out</button>
+              <span *ngIf="mediaItem.mediaTypeID == 1"><i title="PDF" class="material-icons icon-size">library_books</i>PDF</span>
+              <span *ngIf="mediaItem.mediaTypeID == 2"><i title="MP4 Video" class="material-icons icon-size">ondemand_video</i>Video</span>
+              <span *ngIf="mediaItem.mediaTypeID == 3"><i title="HTML" class="material-icons icon-size">video_label</i>HTML</span>
+              <span *ngIf="mediaItem.mediaTypeID == 4"><i title="Training Manual" class="material-icons icon-size">folder</i>Manual</span>
+              <div *ngIf="mediaItem.mediaTypeID == 5" class="footer-content"><i title="Training Manual" class="material-icons badge-icon">person</i><div class="footer-title">Distance Learning</div></div>
+
+              <!--<span *ngIf="mediaItem.mediaTypeID == 5"><i title="Distance Learning" class="material-icons icon-size">person</i>Distance Learning</span>-->
+              <!--<span *ngIf="mediaItem.mediaTypeID == 6"><i title="External Link" class="material-icons icon-size">language</i>Link</span>-->
+            <!--</footer>-->
+          <!--</div>
+        </li>
+      </ul>
+    </div>
+  </div>-->-->
+</div>

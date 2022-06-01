@@ -1,0 +1,34 @@
+<div class="row session-block">
+  <div class="col-10">
+
+    <div class="row">
+      <div class="col">
+        <p style="margin-bottom: 0px;"><b>Start Date</b> {{startDateString}}</p>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col">
+        <p style="margin-bottom: 0px;"><b>End Date:</b> {{endDateString}}</p>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col">
+        <span><b>Event Link: </b></span>
+        <a *ngIf="linksEnabled" href="{{session.urlPath}}" target="_blank">{{session.urlPath}}</a>
+        <span *ngIf="!linksEnabled" style="color:red"><i>Link disabled until attendance requirements are met</i></span>
+      </div>
+    </div>
+
+    <div class="row" *ngIf="passwordViewable && session.isPasswordProtected">
+      <div class="col">
+        <p style="margin-bottom: 0px;"><b>Password:</b> {{session.password}}</p>
+      </div>
+    </div>
+
+  </div>
+  <div class="col-2 edit-icon-wrapper">
+    <div class="pencil-wrapper" *ngIf="editable && !editing"><i name="Edit Session" class="material-icons pencil-icon" (click)="onEditClicked()">create</i></div>
+  </div>
+</div>

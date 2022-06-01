@@ -1,0 +1,76 @@
+<div class="feedbackPage container">
+  <div [hidden]="submitted">
+    <div class="text-center">
+      <h1>{{feedbackTitle}}</h1>
+
+      <p>{{feedbackTypeText}}</p>
+    </div>
+
+
+    <form #generalForm="ngForm" class="feedbackForm" [formGroup]="feedbackForm">
+      <div class="form-group" *ngIf="mediaFeedback">
+        <label for="media-title" class="text-left">Media Title <span style="color:red">*</span></label>
+        <input type="text" class="form-control" id="media-title"
+               name="media-title" placeholder="{{media.title}}" disabled required>
+      </div>
+
+      <div class="form-group">
+        <label for="uid" class="text-left">United ID <span style="color:red">*</span></label>
+        <input type="text" class="form-control" id="uid"
+               name="uid" placeholder="{{feedbackData.uid}}" disabled required>
+      </div>
+
+      <div class="form-group">
+        <label for="email" class="text-left">United Email <span style="color:red">*</span></label>
+        <input *ngIf="disabledEmail" type="email" formControlName="Email" class="form-control" id="email"
+               name="email" placeholder="{{feedbackData.email}}" required>
+
+        <input *ngIf="!disabledEmail" formControlName="Email" type="email" class="form-control" id="email"
+               name="email" placeholder="Enter email" required>
+      </div>
+
+      <div class="form-group">
+        <label for="lname">Last Name <span style="color:red">*</span></label>
+        <input type="text" class="form-control" id="lname"
+               name="lname" placeholder="{{feedbackData.lname}}" disabled required>
+      </div>
+
+      <div class="form-group">
+        <label for="fname">First Name <span style="color:red">*</span></label>
+        <input type="text" class="form-control" id="fname"
+               name="fname" placeholder="{{feedbackData.fname}}" disabled required>
+      </div>
+
+      <div class="form-group">
+        <label for="phone">Phone Number</label>
+        <input [(ngModel)]="phoneInput" [ngModelOptions]="{standalone: true}" type="text" class="form-control" id="phone"
+               name="phone" placeholder="{{ placeHolder }}">
+      </div>
+
+      <div class="form-group">
+        <label for="subject">Email Subject <span style="color:red">*</span></label>
+        <input type="text" formControlName="Subject" class="form-control" id="subject"
+               name="subject" placeholder="Enter email subject">
+      </div>
+
+
+      <div class="form-group">
+        <label *ngIf="contact" for="feed">Contact Reason <span style="color:red">*</span></label>
+        <label *ngIf="!contact" for="feed">Feedback <span style="color:red">*</span></label>
+        <br />
+        <textarea (click)="ClearForInput()" class="inputField" formControlName="FeedbackText" id="feed" name="feed" placeholder="{{feedbackPlaceHolder}}" required>
+        </textarea>
+      </div>
+
+      <button type="submit" class="btn btn-lg btn-success mb-5" [disabled]="!generalForm.form.valid" (click)="SubmitFeedback()">Submit</button>
+    </form>
+  </div>
+  <div [hidden]="!submitted" class="text-center">
+    <div class="wrapper" *ngIf="!success">
+      <mat-spinner></mat-spinner>
+    </div>
+    <div *ngIf="success">
+      <h2>Thank you for your feedback!</h2>
+    </div>
+  </div>
+</div>

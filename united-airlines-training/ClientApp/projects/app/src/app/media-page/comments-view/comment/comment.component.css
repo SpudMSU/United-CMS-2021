@@ -1,0 +1,52 @@
+.poster {
+  font-size: larger;
+  font-weight: bold;
+}
+
+.commentBody {
+  padding: 5px 10px;
+}
+
+.commentDate {
+    font-size: small;
+}
+
+.deleteWrapper {
+
+}
+
+.deleteIcon {
+    position: relative;
+    float: right;
+}
+
+.deleteIcon:hover {
+    cursor: pointer;
+}
+
+.approveIcon {
+    position: relative;
+    float: right;
+}
+
+.approveIcon:hover {
+    cursor: pointer;
+}
+
+.replyIcon {
+  position: relative;
+  float: right;
+}
+
+.replyIcon:hover {
+  cursor: pointer;
+}
+
+#reply-input {
+  width: 90%;
+}
+
+/*
+.row {
+    padding: 3px 0px;
+}*/

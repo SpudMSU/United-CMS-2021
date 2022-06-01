@@ -1,0 +1,326 @@
+.MediaPage {
+    margin: 0 auto;
+    justify-content: center;
+}
+
+section {
+  background-color: #F6F7FF;
+  margin: 15px;
+  padding: 8px;
+}
+
+.PageHalf {
+  width: 50%;
+  height: auto;
+  /*float: left;*/
+  margin: 0 auto;
+  margin-bottom: 0px;
+  display: inline-block;
+}
+
+.rightHalf {
+    float: right;
+}
+
+.leftHalf {
+    float:left;
+}
+
+.editComment {
+  font-size: small;
+  color: dodgerblue;
+}
+
+.editComment:hover {
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.deleteComment {
+  font-size: small;
+  color: indianred;
+  float: right;
+  top: 0;
+}
+
+.deleteComment:hover {
+  cursor: pointer;
+  font-weight: 600;
+}
+
+
+.approveComment {
+  font-size: small;
+  color: green;
+  float: right;
+  top: 0;
+}
+
+.approveComment:hover {
+  cursor: pointer;
+  font-weight: 600;
+}
+
+#InfoHalf {
+    /*float: right;*/
+}
+
+#MediaViewerBlock {
+    padding: 0px;
+}
+
+.MediaWindow {
+    background-color: black;
+    max-width: 100%;
+    height: 70vh;
+}
+
+iframe {
+    height: 100%;
+    width: 100%;
+}
+
+footer {
+  background-color: #151515;
+  width: 100%;
+  max-height: 10%;
+}
+
+video {
+    width: 100%;
+    height: 100%;
+}
+
+button {
+  background-color: #00B2A9;
+  border: none;
+  color: white;
+  margin: 1px;
+}
+
+button:hover {
+    background-color: white;
+    color: black;
+}
+
+#talkData {
+    margin: 0 auto;
+}
+
+#talkTitle {
+    margin: 20px;
+}
+
+#talkData li {
+    margin: 5px;
+    color: white;
+}
+
+#MetaContainer {
+    position: relative;
+    height: 10vw;
+    max-height: 100%;
+}
+
+.MetaHalf {
+    width: 50%;
+    height: auto;
+    float: left;
+}
+
+.MetaItem {
+    position: absolute;
+    display: flex;
+}
+
+.UploadInfoText {
+    font-size: 1.1rem;
+}
+
+.LikeContainer {
+    margin: 0 auto;
+    text-align: center;
+}
+
+.LikeDisplay {
+    display: inline;
+    margin: 40px;
+}
+
+.editField {
+    width: 100%;
+}
+
+i {
+    margin-right: 5px;
+    cursor: pointer;
+    /*Prevent the user from selecting the icon as if it were text*/
+    user-select: none;
+}
+
+.UploaderName {
+    margin-left: 8px;
+}
+
+.RelatedMediaItem {
+  border: solid 2px #b3b3b3;
+  padding: 5px;
+  margin: 5px;
+  display: flex;
+  cursor: pointer;
+}
+
+  .RelatedMediaItem:hover {
+    border-color: black;
+    background-color: #dadada;
+  }
+
+.Thumbnail {
+    height: 99px;
+    width: 176px;
+    object-fit: cover;
+}
+
+#mediaTitle {
+    display: inline;
+}
+
+.media-id {
+    padding: 0;
+    margin: 0;
+}
+
+.RelatedTitle {
+    margin: 10px;
+    margin-top: auto;
+    margin-bottom: auto;
+}
+
+.Comment {
+  border: solid 2px #b3b3b3;
+  margin: 5px;
+  padding: 5px;
+}
+
+.CommentPost {
+    margin: 5px;
+    padding: 5px;
+}
+
+#CommentsDiv {
+    margin-bottom: 50px;
+}
+
+.linkButton {
+    text-decoration: none;
+    color: white;
+    background-color: blue;
+    padding: 20px;
+    margin: 0 auto;
+    border-radius: 8px;
+    cursor: pointer;
+    text-align: center;
+    vertical-align: middle;
+}
+
+.tabLinkContainer {
+    margin: 0 auto;
+}
+
+.NonDisplayMedia {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.NonDisplayMedia h3 {
+    color: white;
+}
+
+.NonDisplayMedia ul {
+    list-style-type: none;
+}
+
+.materialIcons {
+    margin: 10px;
+    vertical-align: middle;
+}
+
+.materialIcons i {
+    font-size: 2.5rem;
+    vertical-align: middle;
+}
+
+.editIcons {
+    float: right;
+}
+
+#commentWriter {
+    width: 100%;
+}
+
+@media (min-width: 1133px) {
+    #InfoHalf {
+        margin-bottom: 50px;
+    }
+
+  .space {
+    margin-bottom: 8em !important;
+  }
+}
+
+/*Ipads*/
+@media (max-width: 1132px) {
+    .PageHalf {
+        width: 98%;
+        float: none;
+    }
+
+    #InfoHalf {
+        float: none;
+    }
+
+    #VideoViewerVariant {
+        height: 40vh;
+    }
+
+    #ELinkViewerVariant {
+        height: 40vh;
+    }
+}
+
+/*Phones*/
+@media (max-width: 567px) {
+
+    .PageHalf {
+        width: 100%;
+    }
+
+    .LikeDisplay {
+        font-size: 1.5rem;
+        margin: 8px;
+    }
+
+    #VideoViewerVariant {
+        height: 30vh;
+    }
+
+    #ELinkViewerVariant {
+        height: 30vh;
+    }
+
+    #mediaTitle {
+        font-size: 2rem;
+    }
+
+    .RelatedTitle {
+        font-size: 1rem;
+    }
+}
+
+.loading-spinner {
+
+}

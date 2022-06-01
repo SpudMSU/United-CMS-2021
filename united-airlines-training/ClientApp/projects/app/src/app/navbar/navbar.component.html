@@ -1,0 +1,32 @@
+<div class="Nav">
+  <ul>
+    <li><a [routerLink]="['/home']" class="homepage">Homepage</a></li>
+    <li><a [routerLink]="['/category/-1/0']" class="category">Channels</a></li>
+    <li><a [routerLink]="['/feedback']" class="feedback">Feedback</a></li>
+    <li *ngIf="helpPageEnabled"><a [routerLink]="['/help']" class="help">Help</a></li>
+    <li *ngIf="aboutusPageEnabled"><a [routerLink]="['/aboutus']" class="aboutus">About Us</a></li>
+    <li *ngIf="roleCodeLevel >= 2"><a [routerLink]="['/analytics']">Analytics</a></li>
+
+    <li class="dropdown" *ngIf="roleCodeLevel >= 2">
+      <button class="dropbtn">Admin</button>
+      <div class="dropdown-content">
+        <a *ngIf="roleCodeLevel >= 2" [routerLink]="['/comment-queue']">Administer Comments</a>
+        <a *ngIf="roleCodeLevel >= 3" [routerLink]="['/admin/media']">Administer Media</a>
+        <a *ngIf="roleCodeLevel >= 4" [routerLink]="['/admin/user']">Administer User Roles</a>
+        <a *ngIf="roleCodeLevel >= 3" [routerLink]="['/admin/data-import-export']">Data Import & Export</a>
+        <a *ngIf="roleCodeLevel >= 3" [routerLink]="['/upload']">Add New Media</a>
+        <a *ngIf="roleCodeLevel >= 4" [routerLink]="['/admin-audit-log']">Administer Audit Log</a>
+      </div>
+    </li>
+
+    <li class="dropdown" *ngIf="roleCodeLevel >= 0">
+      <button class="dropbtn">My Profile</button>
+      <div class="dropdown-content">
+        <a *ngIf="roleCodeLevel >= 0" [routerLink]="['/profile-page']">About Me</a>
+        <a *ngIf="roleCodeLevel >= 0" [routerLink]="['/manage-comments']">My Comments</a>
+        <a *ngIf="roleCodeLevel >= 0" [routerLink]="['/manage-comments']">My Likes</a>
+        <a *ngIf="roleCodeLevel >= 0" [routerLink]="['/report/user/u085461']">My Engagement Report</a>
+      </div>
+    </li>
+  </ul>
+</div>

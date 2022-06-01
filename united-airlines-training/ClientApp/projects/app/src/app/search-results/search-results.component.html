@@ -1,0 +1,29 @@
+<section>
+  <h2>Search Results for '{{this.searchTerm}}'</h2>
+  <!--Search results for media-->
+  <h3 *ngIf="this.searchType == 'media'">Media:</h3>
+  <p *ngIf="this.results && this.results.length < 1">No results found</p>
+  <div class="SearchedMediaItem" *ngFor="let mediaItem of results;">
+    <div class="ThumbnailContainer" routerLink="/media/{{mediaItem.mediaID}}">
+      <img src="{{SitePath + mediaItem.thumbnailPath}}" class="Thumbnail" />
+    </div>
+    <div class="metaContainer" routerLink="/media/{{mediaItem.mediaID}}">
+      <h4>{{mediaItem.title}}</h4>
+      <p *ngIf="mediaItem.mediaTypeID == 1">Media Type: PDF</p>
+      <p *ngIf="mediaItem.mediaTypeID == 2">Media Type: Video</p>
+      <p *ngIf="mediaItem.mediaTypeID == 3">Media Type: HTML</p>
+      <p *ngIf="mediaItem.mediaTypeID == 4">Media Type: Training Manual</p>
+      <p *ngIf="mediaItem.mediaTypeID == 5">Media Type: Tech Talk</p>
+      <p *ngIf="mediaItem.mediaTypeID == 6">Media Type: External Video</p>
+      <p id="mediaDescription">Description: {{mediaItem.description}}</p>
+    </div>
+    <div class="buttonContainer" *ngIf="mediaItem.mediaTypeID != 4 && mediaItem.mediaTypeID != 5">
+      <button (click)="openDialog(mediaItem);" class="popButton">Pop Out</button>
+    </div>
+  </div>
+  <!--Search results for channels-->
+  <h3 *ngIf="this.searchType == 'channels'">Channels</h3>
+  <div *ngFor="let channel of channels;">
+    <a [routerLink]="['/category',channel.channelID]">{{channel.title}}</a>
+  </div>
+</section>

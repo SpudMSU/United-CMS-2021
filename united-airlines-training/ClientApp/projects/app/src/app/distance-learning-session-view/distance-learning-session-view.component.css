@@ -1,0 +1,36 @@
+
+.session-block {
+  margin-bottom: 10px;
+}
+
+.session-title {
+  font-weight: 500;
+  font-size: larger;
+}
+
+.pencil-wrapper {
+    margin-top: 15px;
+}
+
+.pencil-icon {
+    font-size: 35px;
+}
+
+.pencil-icon:hover {
+    cursor: pointer;
+}
+
+.edit-icon-wrapper {
+    text-align: center;
+}
+
+.disabledLink {
+  color: currentColor;
+  opacity: 0.5;
+  text-decoration: none;
+  pointer-events: none;
+}
+
+.disabledLink:hover {
+    cursor: not-allowed;
+}

@@ -1,0 +1,37 @@
+.a{
+    cursor:pointer;
+}
+
+
+button {
+  background-color: #007bff;
+  border: none;
+  color: white;
+  margin: 1px;
+}
+
+.sub {
+  background-color: #44883E !important;
+}
+
+  button:hover {
+    background-color: white;
+    color: black;
+  }
+
+
+.del {
+  background-color: #D50032 !important;
+}
+
+.edit-button {
+  background-color: #7C878E !important;
+}
+
+.lab {
+  font-weight: 500;
+}
+
+.addchild {
+    margin-top: 3em;
+}

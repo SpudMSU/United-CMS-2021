@@ -1,0 +1,91 @@
+<!-- Instructions Block -->
+<section id="instructionsSection">
+  <div class="row">
+    <div class="col">
+      <h3>Instructions</h3>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col">
+      <p>{{instructions}}</p>
+    </div>
+  </div>
+</section>
+
+<!-- Attendance Requirements Block -->
+<section id="attendanceRequirementsSection">
+  <div class="row">
+    <div class="col">
+      <h3>Attendance Requirements</h3>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col">
+      <ul class="requirements-list">
+        <li *ngFor="let requirement of attendanceRequirements">{{requirement.description}}</li>
+      </ul>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col">
+      <div class="form-check">
+        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" (change)="toggleRequirementsVerified()">
+        <label class="form-check-label" for="flexCheckDefault">
+          <b>I verify that I have met all the attendance Requirements Above.</b>
+        </label>
+      </div>
+    </div>
+  </div>
+
+</section>
+
+<!-- Scheduled events block -->
+<section id="eventsSection">
+  <div class="row">
+    <div class="col">
+      <h3>Scheduled Events</h3>
+    </div>
+  </div>
+  <div class="row" *ngIf="!requirementsVerified">
+    <div class="col">
+      <p><i style="color: red">Please verify that you have met the above requirements before proceeding</i></p>
+    </div>
+  </div>
+
+  <div *ngIf="hiddenSessions.length > 0" class="row">
+    <div class="col">
+      <p class="passcode-note"><i>Some sessions are hidden and can only be accessed via a passcode.  If you would like to attend these sessions and don't have a passcode, please contact your administrator</i></p>
+    </div>
+  </div>
+  <div class="row passcode-block" *ngIf="hiddenSessions.length > 0">
+    <div class="col">
+      
+      <div class="row passcode-input-block">
+        <div class="col">
+          <label *ngIf="showPasscodeError" for="passcodeField" class="form-label"><i style="color: red">Invalid Passcode, please try again.</i></label>
+          <input class="form-control passcode-input" id="passcodeField" placeholder="input passcode" (keyup.enter)="onPasscodeSubmitted()">
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col">
+          <button type="submit" class="btn btn-primary" (click)="onPasscodeSubmitted()">Submit</button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col">
+      <p *ngIf="activeSessions.length == 0 && hiddenSessions.length == 0">No Sessions scheduled...</p>
+      <app-distance-learning-session-view *ngFor="let session of activeSessions"
+                                          [session]="session"
+                                          [editable]="false"
+                                          [linksEnabled]="requirementsVerified">
+      </app-distance-learning-session-view>
+    </div>
+  </div>
+
+</section>
+

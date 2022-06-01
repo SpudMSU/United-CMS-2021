@@ -1,0 +1,470 @@
+*{
+    padding:0;
+    margin-top:10px;
+}
+.content{
+    width:100%;
+    height:100vh;
+    margin:0;
+}
+.content-left {
+  width: 20%;
+  height: 100%;
+  background-color: #333;
+  float: left;
+  position: absolute;
+  display: block;
+}
+
+.content-left:hover{
+    transform: translateX(0px);
+}
+
+.content-left-inner {
+  width: 19%;
+  height: 100%;
+  background-color: #333;
+  float: left;
+  position: absolute;
+  display: block;
+  width: calc(100% - 12px);
+}
+
+.content-left seg{
+    margin:0;
+}
+.content-right {
+  width: 100%;
+  height: 100%;
+  background-color: #D4D4D0;
+  float: right;
+  overflow: auto;
+}
+.left-title {
+  height: 50px;
+  width: 100%;
+  text-align: center;
+  position:relative;
+}
+  .left-title div {
+    display: block;
+    line-height: 50px;
+    color: white;
+    text-align:center;
+    text-decoration: none;
+    font-size: 20px;
+    display: inline;
+  }
+  .left-title a {
+    padding: 0px 0;
+    margin-left:5px;
+    position:absolute;
+    /*right:1%;*/
+  }
+
+.seg {
+  border-bottom: 1px solid black;
+}
+
+
+
+.seg-light {
+  border-bottom: 1px solid #D4D4D0;
+}
+
+.nav {
+  margin-top: 0;
+}
+.nav-menu {
+  width: 100%;
+  height: 100%;
+  margin:0px;
+  padding:0;
+}
+.nav-title {
+  color: white;
+  width: 100%;
+  cursor: pointer;
+  margin: 0px;
+  padding: 10px 5px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-right:20px;
+}
+
+  .nav-title:hover {
+    /*background: #CEB888 url(/assets/images/arrow1.svg) no-repeat right;*/
+    background-size: 16px;
+  }
+
+.nav-title span{
+    display:inline;
+    margin-left:1%;
+    margin-top:0;
+}
+  .nav-title .editanddelete {
+    margin-top: 0;
+  }
+    .nav-title .editanddelete a {
+      margin-top: 0;
+    }
+    .nav-title .editanddelete button {
+      margin-top: 0;
+    }
+
+    .nav-content {
+      width: 100%;
+      height: 100%;
+      background-color: #0c1119;
+      margin-top: 0;
+    }
+
+      .nav-content li {
+        margin: 0;
+        display: block;
+        /*height:30px;*/
+        width: 100%;
+        color: #CCCCCC;
+        text-decoration: none;
+        text-align: left;
+        /*text-indent: 2em;*/
+        line-height: 30px;
+        font-size: 14px;
+        cursor: pointer;
+        margin-top: 0;
+      }
+
+      .nav-content li a{
+        margin-top: 0;
+      }
+
+        .nav-content li:hover {
+          width: 100%;
+          color: #FFFFFF;
+          /*background-color: #0c2340;*/
+        }
+
+.pdownarrow {
+  background: #0C2340 url(/assets/images/arrow2.svg) no-repeat right;
+  background-size: 16px;
+}
+
+.prightarrow:hover {
+  background: #0C2340 url(/assets/images/arrow1.svg) no-repeat right;
+  background-size: 16px;
+}
+
+.downarrow {
+  background: #3f51b5 url(/assets/images/arrow2.svg) no-repeat right top;
+  background-size: 16px;
+}
+
+.rightarrow:hover {
+  background: #3f51b5 url(/assets/images/arrow1.svg) no-repeat right;
+  background-size: 16px;
+}
+
+.sort {
+  background-color: #B6B8DC;
+  color: white;
+  padding: 7px 12px 7px 12px;
+  font-size: 16px;
+  border: none;
+  cursor: pointer;
+  border-radius: 10px;
+  position: relative;
+  right: 2em;
+  margin-top: 0;
+}
+
+.drop {
+  top: 15%;
+  right: 0;
+  position: absolute;
+  float: right;
+}
+
+.dc {
+  display: none;
+  position: absolute;
+  background-color: #f9f9f9;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  right: 43%;
+  margin-top: 0px;
+}
+  .dc a {
+    color: black;
+    padding: 12px 10px;
+    text-decoration: none;
+    display: block;
+    margin-top:0%;
+  }
+
+    .dc a:hover {
+      background-color: #f1f1f1
+    }
+
+.drop:hover .dc {
+  display: block;
+}
+
+.drop:hover .sort {
+  background-color: #3e8e41;
+}
+
+.thumbnail {
+  width: 160px;
+  height: 100px;
+  object-fit: cover;
+}
+
+.media {
+  margin-left: 5%;
+  margin-top:5px;
+}
+.medialst {
+  list-style-type: none;
+  display: flex;
+  flex-direction: column;
+  width: 95%;
+}
+
+.medialst li{
+}
+  .medialst .pagi {
+    margin-top: 5%;
+    padding: 0;
+  }
+  .medialst li .mediaLink {
+    display: flex;
+    background-color: white;
+    height: 100%;
+    padding: 10px;
+    cursor: pointer;
+  }
+    .medialst li .mediaLink .thumbnail {
+      margin:0;
+      padding: 0;
+    }
+    .medialst li .mediaLink .text {
+      margin-left:5%;
+      display: flex;
+      flex-direction: column;
+    }
+      .medialst li .mediaLink .text .title {
+        font-size: 20px;
+        margin: 0;
+        padding: 0;
+      }
+      .medialst li .mediaLink .text .description {
+        font-size: 12px;
+        color: gray;
+        margin: 0;
+        padding: 0;
+      }
+      .medialst li .mediaLink .text .type {
+        margin: 0;
+        padding: 0;
+        font-size: 12px;
+      }
+      .medialst li .mediaLink .text .mediaid {
+        margin: 0;
+        padding: 0;
+        font-size: 12px;
+        margin-right: 3em;
+      }
+
+
+.side-side {
+    display: flex;
+}
+
+.current {
+  background-color: #0C2340;
+  /*padding: 0 5px;*/
+}
+.currentpage {
+  margin-left: 5%;
+}
+.currentpage p{
+    font-size:25px;
+    margin-top: 1em;
+    font-weight: 500;
+}
+
+.sidebar{
+    height:calc(100% - 200px);
+}
+
+.titleorkey{
+    margin-left:5%;
+    margin-bottom:0;
+}
+
+
+.add-button {
+  margin-right: 0.5em;
+  color: #44883E;
+  font-size: 1.5em;
+  margin-top: 5px;
+}
+
+
+.edit-button {
+  color: #D4D4D0;
+  font-size: 1.5em;
+}
+
+
+.delete-button {
+  color: #D50032;
+  font-size: 1.5em;
+}
+
+/*Search-Bar*/
+.search {
+  width: 100%;
+  height: 30px;
+  position: relative;
+  display: flex;
+  margin-top: -0.5em;
+  margin-bottom: 1em;
+}
+
+.search-button {
+  width: 30px;
+  height: 30px;
+  border: 1px solid #B6B8DC;
+  background: #B6B8DC;
+  text-align: center;
+  color: #fff;
+  border-radius: 0 5px 5px 0;
+  cursor: pointer;
+  font-size: 20px;
+}
+
+.searchbar {
+  border: 2px solid #B6B8DC;
+  border-right: none;
+  padding: 5px;
+  height: 30px;
+  margin-left: 5%;
+  border-radius: 5px 0 0 5px;
+  color: #B6B8DC;
+}
+
+.search-button img {
+  display: flex;
+  height: 30px;
+  width: 30px;
+  margin: 0 auto;
+}
+
+.search-type {
+    width: 10%;
+    height: 5%;
+}
+
+.noitem{
+    margin-left:5%;
+    margin-top:30px;
+    font-size:22px;
+}
+
+.showandhide {
+  margin-top: 0;
+  margin-bottom: 10px;
+}
+
+.openchannel {
+  background: url(/assets/images/open_channelbar.svg) no-repeat right;
+  background-size: 25px;
+  width:30px;
+  height:30px;
+  float:right;
+}
+
+@media (min-width: 1133px) {
+  .content-left {
+    width: 19% !important;
+  }
+  .content-right{
+      width:80% !important;
+  }
+  .openchannel {
+    display:none !important;
+  }
+}
+
+/*Ipads*/
+@media (max-width: 1132px) {
+  
+
+  /*.medialst li .mediaLink .text .title {
+    max-width: 270px !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+    white-space: nowrap !important;
+  }
+  .medialst li .mediaLink .text .description {
+    max-width: 270px !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+    white-space: nowrap !important;
+  }*/
+
+  .content-left {
+    width: 40% !important;
+    transition: transform 200ms ease-in;
+    transform: translateX(calc(-100% + 30px));
+    height: 70px;
+    overflow: hidden;
+  }
+  .content-left:hover{
+      height:100%;
+      /*left:0px;*/
+  }
+
+  .content-right {
+    width: 100% !important;
+  }
+}
+
+/*Phones*/
+@media (max-width: 567px) {
+  .medialst li .mediaLink {
+    display: block !important;
+    
+  }
+    .medialst li .mediaLink .text {
+      margin-left: 0 !important;
+      display: block !important;
+    }
+  .searchbar {
+    width: 110px !important;
+  }
+  .drop {
+    top: 16.5% !important;
+  }
+  .content-left {
+    width: 80% !important;
+    transition: transform 200ms ease-in;
+    transform: translateX(calc(-100% + 12px));
+  }
+
+  .content-right {
+    width: 100% !important;
+  }
+}
+
+.pencil-wrapper {
+    margin-left: auto;
+    margin-right: 0px;
+    margin-top: auto;
+    margin-bottom: auto;
+}
+
+
+

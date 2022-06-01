@@ -1,0 +1,121 @@
+<body>
+  <div class="content">
+
+
+    <div class="content-right" *ngIf="currentchannelid != -1">
+      <!--<form class="titleorkey">
+        <select id="searchtype" name="searchtype" [(ngModel)]="searchtype" class="form-control search-type">
+          <option value="title">Title</option>
+          <option value="keyword">Keyword</option>
+        </select>
+      </form>-->
+      <div class="currentpage"><p>{{currentchanneltitle}}</p></div>
+      <div class="search">
+        <input class="searchbar" placeholder="Search {{currentchanneltitle}} channel" #box (keyup.enter)="onKey(box.value)" [(ngModel)]="searchInput">
+        <button type="submit" class="search-button"><img src="{{SitePath}}/assets/images/icon.png" (click)="onKey(box.value)"></button>
+
+        <div class="drop">
+          <button class="sort">Sort By</button>
+          <div class="dc">
+            <!--<a class="cname" href="javascript:void(0);"> Alphabetical </a>-->
+            <div class="D">
+              <a (click)="atoz()">Name (A->Z)</a>
+              <a (click)="ztoa()">Name (Z->A)</a>
+            </div>
+            <!--<a class="cname" href="javascript:void(0);"> Media Type</a>
+        <div class="D">
+          <a (click)="pick(1);"> PDF </a>
+          <a (click)="pick(3);"> Html </a>
+          <a (click)="pick(2);"> MP4 </a>
+          <a (click)="pick(4);"> CourseTrainingManual </a>
+          <a (click)="pick(5);"> TechTalk </a>
+          <a (click)="pick(6);"> ExternalLink </a>
+        </div>-->
+
+          </div>
+        </div>
+      </div>
+
+      <form class="Numperpage" style="margin-left: 5%;">
+        <select style="width:130px" id="numberperpage" name="numberperpage" [(ngModel)]="numperpage" class="form-control search-type" (click)="numforeachpage()">
+          <option value="five">5 per page</option>
+          <option value="ten">10 per page</option>
+          <option value="twenty">20 per page</option>
+        </select>
+      </form>
+
+      <div class="noitem" *ngIf="channelMedias?.length<1 && !searched">No Items</div>
+      <div class="noitem" *ngIf="channelMedias?.length<1 && searched">No results found for search result in {{currentchanneltitle}}</div>
+      <div class="media">
+        <ul class="medialst">
+          <li *ngFor="let media of channelMedias | paginate: { itemsPerPage: perPageCount, currentPage: p }; let i = index" [attr.data-index]="i">
+            <div class="mediaLink" routerLink="/media/{{media.mediaID}}">
+              <!--(click)=""-->
+              <img class="thumbnail" src="{{SitePath + media.thumbnailPath}}" width="120" height="90" />
+              <div class="text">
+                <p class="title">{{media.title}}</p>
+                <p class="description">{{media.description}}</p>
+                <div class="side-side">
+                  <p class="mediaid">Media ID: {{media.mediaID}}</p>
+                  <p class="type">Media Type: {{media.mediaTypeName}}</p>
+                </div>
+              </div>
+              <div class="pencil-wrapper" *ngIf="roleCodeLevel >= 3"><i class="material-icons" style="font-size: 35px;" routerLink="/upload/{{media.mediaID}}">create</i></div>
+
+            </div>
+          </li>
+          <pagination-controls *ngIf="channelMedias?.length>0" class="pagi" (click)="updateIndex(p)" (pageChange)="p = $event"></pagination-controls>
+        </ul>
+      </div>
+
+    </div>
+
+    <div class="content-right" *ngIf="currentchannelid == -1">
+      <h1 style="margin-left: 5%; margin-top: 5%;">Channels Page</h1>
+      <p style="margin-left: 5%; margin-top: 5%; font-size: 20px;">Open channel on the left side bar</p>
+    </div>
+
+    <div *ngIf="isShown" class="content-left">
+      <div class="left-title">
+
+        <div>Channels</div>
+        <a *ngIf="roleCodeLevel >= 4" [routerLink]="['/addchannel']" title="Add channel"><i class="material-icons add-button">add_circle</i></a>
+        <div class="openchannel"></div>
+      </div>
+      <div class="seg"></div>
+      <!--sidebar navigation-->
+      <ul class="nav">
+        <li class="nav-menu seg-light" *ngFor="let channelItem1 of rootchannel">
+          <div class="nav-title" (click)="getspecificid(channelItem1.channelID, 'father', 0)" [ngClass]="channelItem1.show&&channelItem1.child?.length>0 ? 'pdownarrow':(channelItem1.child?.length>0) ? 'prightarrow':'' + channelItem1.currentClasses">
+            <span>{{channelItem1.title}}</span>
+            <span class="editanddelete">
+              <a *ngIf="roleCodeLevel >= 4" routerLink="/editchannel/{{channelItem1.channelID}}/{{channelItem1.level}}"><i class="material-icons edit-button">edit</i></a>
+              <i *ngIf="roleCodeLevel >= 4" (click)="deletechannel(channelItem1.channelID)" class="material-icons delete-button">delete</i>
+            </span>
+
+          </div>
+          <ul class="nav-content" *ngIf="channelItem1.show">
+            <li *ngFor="let channelItem2 of channelItem1.child" [ngClass]="channelItem2.show &&channelItem2.child?.length>0 ? 'downarrow':(channelItem2.child?.length>0)?'rightarrow':''">
+              <a style="padding-left: 15px;width: 100%;display: inline-block;position: relative;z-index:1" (click)="getspecificid(channelItem2.channelID, '', 1)">{{channelItem2.title}}</a>
+              <ul class="nav-content" *ngIf="channelItem2.show">
+                <li *ngFor="let channelItem3 of channelItem2.child" [ngClass]="channelItem3.show &&channelItem3.child?.length>0 ? 'downarrow':(channelItem3.child?.length>0)?'rightarrow':''">
+
+                  <a style="padding-left: 30px;width: 100%;display: inline-block;position: relative;z-index: 1" (click)="getspecificid(channelItem3.channelID, '', 2)">{{channelItem3.title}}</a>
+                  <ul class="nav-content" *ngIf="channelItem3.show">
+                    <li *ngFor="let channelItem4 of channelItem3.child" [ngClass]="channelItem4.show &&channelItem4.child?.length>0 ? 'downarrow':(channelItem4.child?.length>0)?'rightarrow':''">
+
+                      <a style="padding-left: 45px;width: 100%;display: inline-block;position: relative;z-index: 1" (click)="getspecificid(channelItem4.channelID, '', 3)">{{channelItem4.title}}</a>
+
+                    </li>
+                  </ul>
+                </li>
+              </ul>
+            </li>
+          </ul>
+      </ul>
+    </div>
+
+    <div></div>
+
+  </div>
+</body>

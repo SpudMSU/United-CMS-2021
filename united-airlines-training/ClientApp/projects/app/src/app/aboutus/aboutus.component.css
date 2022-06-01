@@ -1,0 +1,22 @@
+.top-part {
+  margin-left: 0.05em;
+  margin-right: 0.05em;
+  background-color: #D4D4D0;
+}
+.top-part h1{
+    text-align:center;
+    padding-top:5%;
+}
+  .top-part p {
+    text-align: center;
+    padding-bottom:5%;
+  }
+.bot-part p{
+    text-align:center; 
+    padding-top: 5%;
+    padding-left: 25%;
+    padding-right: 25%;
+}
+.bot-part h2 {
+  text-align: center;
+}

@@ -1,0 +1,104 @@
+<h1 mat-dialog-title>Edit Distance Learning Session</h1>
+
+<div mat-dialog-content>
+  <div class="row">
+    <div class="col">
+
+      <!-- Form -->
+      <div class="row">
+        <div class="col">
+
+          <!-- Event link -->
+          <div class="row">
+            <div class="col">
+              <label class="sessionInputTitle">
+                Event Link
+                <input  class="form-control url_input" type="url" [(ngModel)]="url"/>
+              </label>
+            </div>
+          </div>
+
+          <!-- Start Date -->
+          <div class="row">
+            <div class="col">
+              <div class="row">
+                <div class="col">
+                  <h5 style="margin-bottom: 0px; margin-left: 8px;">Start Date</h5>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col">
+                  <label>
+                    Date:
+                    <input [(ngModel)]="startDate" class="form-control" type="date" />
+                  </label>
+                </div>
+                <div class="col">
+                  <label>
+                    Time:
+                    <input [(ngModel)]="startTime" class="form-control" type="time" />
+                  </label>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- End Date -->
+          <div class="row">
+            <div class="col">
+              <div class="row">
+                <div class="col">
+                  <h5 style="margin-bottom: 0px; margin-left: 8px;">End Date</h5>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col">
+                  <label>
+                    Date:
+                    <input [(ngModel)]="endDate" class="form-control" type="date" />
+                  </label>
+                </div>
+                <div class="col">
+                  <label>
+                    Time:
+                    <input [(ngModel)]="endTime" class="form-control" type="time" />
+                  </label>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="row">
+            <div style="padding-left: 27px;" class="col">
+              <div class="form-check">
+                <input class="form-check-input" type="checkbox" id="editPasscodeCheckbox" value="" [(ngModel)]="passwordProtected" >
+                <label class="form-check-label" for="editPasscodeCheckbox">
+                  Passcode Protected?
+                </label>
+              </div>
+            </div>
+          </div>
+
+          <div class="row" *ngIf="passwordProtected">
+            <div class="col">
+              <label class="sessionInputTitle">
+                Passcode
+                <input [(ngModel)]="password" class="form-control" placeholder="Input Passcode..." />
+              </label>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<div mat-dialog-actions class="row">
+  <div class="col">
+    <button class="btn btn-md btn-success mb-5 submitButton" (click)="submit()">Submit</button>
+    <button class="btn btn-md btn-danger mb-5 submitButton" (click)="delete()">Delete</button>
+    <button class="btn btn-md btn-info mb-5 submitButton" (click)="cancel()">Cancel</button>
+  </div>
+</div>

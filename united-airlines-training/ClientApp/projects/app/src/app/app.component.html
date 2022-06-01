@@ -1,0 +1,16 @@
+<body>
+  <div class="box">
+    <!-- Header -->
+    <app-page-header [role]="userRole"></app-page-header>
+
+    <!-- Nav(between Header and Body) -->
+    <app-navbar [roleCodeLevel]="userRole"></app-navbar>
+
+    <div class="container">
+      <router-outlet></router-outlet>
+    </div>
+
+    <!-- Footer -->
+    <app-page-footer></app-page-footer>
+  </div>
+</body>

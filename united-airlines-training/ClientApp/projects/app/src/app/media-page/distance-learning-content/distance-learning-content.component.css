@@ -1,0 +1,34 @@
+section {
+  background-color: #F6F7FF;
+  margin: 15px;
+  padding: 10px;
+}
+
+.session-block {
+    margin-bottom: 10px;
+}
+
+.session-title {
+    font-weight: 500;
+    font-size: larger;
+}
+
+.requirements-list {
+    padding-left: 25px;
+}
+
+.passcode-input {
+    width: 40%;
+}
+
+.passcode-input-block {
+    margin-bottom: 5px;
+}
+
+.passcode-block {
+    margin-bottom: 1em;
+}
+
+.passcode-note {
+    margin-bottom: 0.5em !important;
+}

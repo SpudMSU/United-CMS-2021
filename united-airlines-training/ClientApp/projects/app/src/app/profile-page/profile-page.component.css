@@ -1,0 +1,134 @@
+/*h1{
+    text-align: center;
+    font-size: 35px;
+    background-color: #787e8a;
+    padding: 10px, 3px, 10px, 3px;
+    color: white;
+}*/
+
+/*h2 {
+  border: solid;
+  border-width: thin;
+  border-color: black;
+  font-size: 25px;
+  background-color: #1f4fb5;
+  color: white;
+  padding-left: 10px;
+}*/
+
+
+/*#box {
+  border: solid;
+  border-color: black;
+  padding-bottom: 20px;
+  margin-bottom: 20px;
+  background-color: #f5f5f5;
+}*/
+
+.col-sm-4 {
+  height: 500px;
+}
+
+/*#bookmarked {
+    border: solid;
+    border-color: black;
+    background-color: #f5f5f5;
+}*/
+
+#box p{
+    padding-left: 10px;
+    border-bottom: thin;
+    border-bottom-color: black;
+}
+
+/*body {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-evenly;
+  margin-top: 15px;
+}*/
+
+/*.card-header {
+  background-color: grey !important;
+  color: white;
+}
+
+.card-text {
+  font-size: 36px;
+}
+
+.card-title {
+  font-size: 1rem;
+  margin-top: 1em;
+}
+
+.avd {
+  font-size: 0.9rem !important;
+}
+
+.card-body {
+  line-height: 0.6;
+}
+
+
+.icon-size {
+  font-size: 2rem;
+}
+
+.icon-info {
+  font-size: 1.4rem;
+  position: absolute;
+  right: 2%;
+  top: 2%;
+}
+
+.icon-size-sm {
+  font-size: 1.2rem;
+}
+
+.icon-big-size {
+  font-size: 10rem;
+}
+
+
+.border-primary {
+  border-color: black !important;
+}
+
+.tooltips .tooltipstext {
+  visibility: hidden;
+  width: 350px;
+  background-color: #555;
+  color: #fff;
+  text-align: center;
+  border-radius: 6px;
+  padding: 5px 0;
+  position: absolute;
+  z-index: 1;
+  bottom: 125%;
+  left: 30%;
+  margin-left: -175px;
+  opacity: 0;
+  transition: opacity 0.3s;
+  font-size: 14px;
+}
+
+  .tooltips .tooltipstext::after {
+    content: "";
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    border-width: 5px;
+    border-style: solid;
+    border-color: #555 transparent transparent transparent;
+  }
+
+.tooltips:hover .tooltipstext {
+  visibility: visible;
+  opacity: 0.9;
+}
+
+#report {
+    margin-top: 25px;
+    margin-bottom: 10px;
+}*/

@@ -1,0 +1,122 @@
+.header {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 90px;
+  display: flex;
+  align-items: center;
+  background-color: #0033A0;
+  color: white;
+  font-weight: 600;
+}
+
+.header img {
+  margin: 0 16px;
+  height: 37.5px;
+}
+
+.header span {
+  font-size: 20px;
+}
+
+/*Search-Bar*/
+.search {
+  width: 100%;
+  position: relative;
+  display: flex;
+  margin: 0 auto;
+}
+
+.Term {
+  width: 100%;
+  border: 2px solid #B6B8DC;
+  border-right: none;
+  padding: 5px;
+  height: 40px;
+  border-radius: 5px 0 0 5px;
+  color: #B6B8DC;
+}
+
+.Term:focus {
+  color: black;
+}
+
+.search-button {
+  width: 40px;
+  height: 40px;
+  border: 1px solid #B6B8DC;
+  background: #B6B8DC;
+  text-align: center;
+  color: #fff;
+  border-radius: 0 5px 5px 0;
+  cursor: pointer;
+  font-size: 20px;
+}
+
+.search-button img {
+  display: flex;
+  height: 30px;
+  width: 30px;
+  margin: 0 auto;
+}
+
+.search-bar {
+  width: 40%;
+  position: relative;
+  display: block;
+  margin-left: auto;
+  margin-right: 15px;
+  padding: 15px;
+}
+
+.role {
+    position: relative;
+    top: 10px;
+    text-align: end;
+    align-self: end;
+}
+
+#SiteTitle {
+    max-width: 30%;
+}
+
+/*Ipads*/
+@media (max-width: 1132px) {
+    .role p {
+        font-size: 0.8rem;
+    }
+}
+
+/*Phones*/
+@media (max-width: 575px) {
+    #SiteTitle {
+        visibility: hidden;
+        width: 0px;
+    }
+
+    .header img {
+        height: 20px;
+    }
+
+    .search-bar {
+        width: 80%;
+        margin-right: 35px;
+    }
+
+  .search-button img {
+      height: 20px;
+      width: 20px;
+  }
+}
+
+/*Attempt to fix the scrollbar from wrapping off the header at small phone screen sizes*/
+@media (max-width: 356px) {
+    .role {
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        direction: rtl;
+
+    }
+}

@@ -1,0 +1,104 @@
+<div class="container">
+    <div class="row">
+        <div class="col-md-12 text-center">
+            <h1></h1>
+        </div>
+    </div>
+    <div class="d-xl-flex justify-content-xl-between flex-xl-row d-sm-flex flex-sm-column justify-content-sm-center">
+        <div>
+            <h3 class="">Media Item Report</h3>
+            <p>Generate report for a specific media item</p>
+            <form novalidate [formGroup]="mediaform">
+                <div class="form-group">
+                    <label>Enter Media ID</label>
+                    <input class="form-control" formControlName="mediaIDInput" min="0" required>
+                    <div class="form-control-feedback"
+                        *ngIf="mediaform.get('mediaIDInput').errors && (mediaform.get('mediaIDInput').dirty || mediaform.get('mediaIDInput').touched)">
+                        <p *ngIf="mediaform.get('mediaIDInput').errors.required">Field is required</p>
+                        <p *ngIf="mediaform.get('mediaIDInput').errors.pattern">Field only accepts numbers</p>
+                    </div>
+                </div>
+                <button type="button" class="btn mb-3 origin-btn"
+                    routerLink="/report/media/{{encodeVal(mediaform.get('mediaIDInput').value)}}"
+                    [disabled]="!mediaform.valid">Generate Report</button>
+            </form>
+
+            <p class="mb-3 text-center"><b>OR</b></p>
+
+            <form novalidate [formGroup]="mediaAltform">
+                <div class="form-group">
+                    <label>Select Media Title</label>
+                    <select style="max-width: 22em;" class="form-control" name="attributeOption"
+                        formControlName="mediaTitleInput">
+                        <option *ngFor="let media of mediaOptions">{{media.title}}</option>
+                    </select>
+                    <!--<input class="form-control" formControlName="mediaTitleInput" required>
+                            <div class="form-control-feedback"
+                                 *ngIf="mediaAltform.get('mediaTitleInput').errors && (mediaAltform.get('mediaTitleInput').dirty || mediaAltform.get('mediaTitleInput').touched)">
+                              <p *ngIf="mediaAltform.get('mediaTitleInput').errors.required">Field is required</p>
+                            </div>-->
+                </div>
+                <button class="btn mb-5 origin-btn"
+                    (click)="getMediaReport()"
+                    [disabled]="!mediaAltform.valid">Generate Report</button>
+            </form>
+        </div>
+        <div>
+          <h3 class="">User Engagement Report</h3>
+          <p>Generate report for a specific user</p>
+          <form novalidate [formGroup]="userform">
+            <div class="form-group">
+              <label>Enter User United ID</label>
+              <input class="form-control" formControlName="UIDInput" maxlength="7" required>
+              <div class="form-control-feedback"
+                   *ngIf="userform.get('UIDInput').errors && (userform.get('UIDInput').dirty || userform.get('UIDInput').touched)">
+                <p *ngIf="userform.get('UIDInput').errors.required">Field is required</p>
+                <p *ngIf="userform.get('UIDInput').errors.minlength">Field must be 7 characters long</p>
+              </div>
+            </div>
+            <button type="button" routerLink="/report/user/{{encodeVal(userform.get('UIDInput').value)}}"
+                    class="btn mb-3 origin-btn" [disabled]="!userform.valid">
+              Generate Report
+            </button>
+          </form>
+
+          <p class="mb-3 text-center"><b>OR</b></p><br>
+
+
+          <button type="button" routerLink="/report/group/" class="btn mb-3 origin-btn">
+            Group User Engagement
+            Report
+          </button>
+
+          <!--<p class="mb-3 text-center"><b>OR</b></p>
+
+          <form novalidate [formGroup]="userAltform">
+            <div class="form-group">
+              <label>Enter User First Name</label>
+              <input class="form-control" formControlName="FirstName">
+              <div class="form-control-feedback"
+                   *ngIf="userAltform.get('FirstName').errors && (userAltform.get('FirstName').dirty || userAltform.get('FirstName').touched)">
+              </div>
+            </div>
+            <div class="form-group">
+              <label>Enter User Last Name</label>
+              <input class="form-control" formControlName="LastName">
+              <div class="form-control-feedback"
+                   *ngIf="userAltform.get('LastName').errors && (userAltform.get('LastName').dirty || userAltform.get('LastName').touched)">
+              </div>
+            </div>
+            <div class="form-group">
+              <label>Enter Users United Email</label>
+              <input class="form-control" formControlName="Email">
+              <div class="form-control-feedback"
+                   *ngIf="userAltform.get('Email').errors && (userAltform.get('Email').dirty || userAltform.get('Email').touched)">
+                <p *ngIf="userAltform.get('Email').errors.pattern">Please enter a valid email</p>
+              </div>
+            </div>
+            <button type="button" routerLink="/report/userAlt/{{encodeVal(userAltform.get('FirstName').value)}}/{{encodeVal(userAltform.get('LastName').value)}}/{{encodeVal(userAltform.get('Email').value)}}" class="btn mb-5" [disabled]="!userAltform.valid">Generate Report</button>
+          </form>-->
+
+
+        </div>
+    </div>
+</div>

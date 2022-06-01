@@ -1,0 +1,18 @@
+<h2 mat-dialog-title>Parent Channel ID: {{data.parentId}}</h2>
+
+<div mat-dialog-content>
+  <div>
+    <h3>Edit {{editchildchannel.title}}</h3>
+    <p>Child Channel ID: {{editchildchannel.channelID}}<p>
+      <input class="form-control" type="text" id="editchildtitle" name="editchildtitle" [(ngModel)]="editchildchannel.title"
+             (click)="ClearForInput()" placeholder="Edit child channel title" required />
+
+
+      <button class="btn sub mt-3" (click)="editchildtitle()">Submit</button>
+  </div>
+
+
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="close()" class="btn mt-4">Close</button>
+</div>

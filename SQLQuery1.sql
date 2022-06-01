@@ -1,0 +1,2 @@
+﻿Update [User]
+set CostCenter

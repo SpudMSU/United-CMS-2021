@@ -1,0 +1,39 @@
+section {
+    width: 80%;
+    margin: 0 auto;
+}
+
+.SearchedMediaItem {
+  border: solid 2px #b3b3b3;
+  padding: 5px;
+  margin: 5px;
+  display: flex;
+}
+
+.ThumbnailContainer {
+  width: 175px;
+  cursor:pointer;
+}
+
+.Thumbnail {
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+}
+
+.metaContainer {
+  margin: 10px;
+  margin-top: auto;
+  margin-bottom: auto;
+  cursor: pointer;
+  flex: 1;
+}
+
+.popButton {
+  width: 100%;
+  height: 100%;
+}
+
+#mediaDescription {
+    text-overflow: ellipsis;
+}

@@ -1,0 +1,70 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-12 text-center mt-4">
+      <h2 class="mb-5">Manage Comments</h2>
+    </div>
+  </div>
+</div>
+
+
+<div>
+  <div class="margin-diff-left">
+    <form class="">
+      <!--<div class="form-group row">
+        <div class="col-xs-2">
+          <label class="lab">Filter by title: </label>
+          <select class="form-control" [(ngModel)]="mediaTitle" name="attributeOption">
+            <option *ngFor="let media of mediaOptions">{{media.title}}</option>
+          </select>
+        </div>
+      </div>-->
+      <div class="form-group row">
+        <div class="col-xs-2">
+          <label class="lab">Filter by approval status: </label>
+          <select class="form-control" [(ngModel)]="status" name="attributeOption">
+            <option *ngFor="let item of statusOptions">{{item.name}}</option>
+          </select>
+        </div>
+      </div>
+      <div class="row">
+        <button class="btn btn-primary" type="submit" (click)="searchResults()">Search</button>
+      </div>
+    </form>
+
+  </div>
+  <div class="d-flex justify-content-center" id="tableContainerDiv">
+    <div class="table-responsive">
+      <table class="table comment-table">
+        <thead>
+          <tr>
+            <th scope="col">United ID</th>
+            <th scope="col">Media Title</th>
+            <th scope="col">Comment Status</th>
+            <th scope="col">Description</th>
+            <th scope="col">Comment Date</th>
+            <th scope="col">Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let comment of returnedComments | paginate: { itemsPerPage: perPageCount, currentPage: p }; let i = index">
+            <td scope="row">{{comment.uid}}</td>
+            <td *ngIf="mediaTitleComments[i + indexForPage]" scope="row">{{mediaTitleComments[i + indexForPage]["title"]}}</td>
+            <td *ngIf="comment.queued" scope="row">Queued</td>
+            <td *ngIf="!comment.queued" scope="row">Approved</td>
+            <td scope="row">{{comment.description}}</td>
+            <td scope="row">{{convertUTCDateToLocalDate(comment.createdAt)}}</td>
+            <td scope="row">
+              <p title="Delete Comment" class="deleteComment" (click)="confirmModal('delete', i + indexForPage)"><i class="material-icons">delete</i></p>
+              <p *ngIf="comment.queued" title="Approve Comment" class="approveComment" (click)="confirmModal('approve', i + indexForPage)"><i class="material-icons">check</i></p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+  </div>
+  <div class="pagNation mb-5">
+    <pagination-controls class="my-pagination mt-3" (click)="updateIndexPage(p)" (pageChange)="p = $event"></pagination-controls>
+  </div>
+  <h3 class="text-center mb-5" *ngIf="noResults && searched">No comments found. Please try another search.</h3>
+</div>

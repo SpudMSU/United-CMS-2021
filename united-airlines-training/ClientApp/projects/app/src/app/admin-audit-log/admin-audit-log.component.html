@@ -1,0 +1,77 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-12 text-center mt-4">
+      <h2 class="mb-5">Administer Audit Log</h2>
+    </div>
+  </div>
+</div>
+
+<div>
+  <div class="margin-diff-left">
+    <form class="form-inline my-2 my-lg-0">
+      <div class="form-group">
+        <select class="form-control" [(ngModel)]="selected" name="attributeOption" (change)="clearOtherInputs()">
+          <option *ngFor="let item of selectOptions">{{item.name}}</option>
+        </select>
+      </div>
+      <select *ngIf="selected == 'Type'" class="form-control mr-sm-2 search-bar" [(ngModel)]="typeInput" name="attributeOption2">
+        <option *ngFor="let type of typeOptions">{{type.name}}</option>
+      </select>
+      <select *ngIf="selected == 'Role'" class="form-control mr-sm-2 search-bar" [(ngModel)]="roleInput" name="attributeOption3">
+        <option *ngFor="let role of roleOptions">{{role.name}}</option>
+      </select>
+      <select *ngIf="selected == 'Date'" class="form-control mr-sm-2 search-bar" [(ngModel)]="dayInput" name="attributeOption4">
+        <option *ngFor="let day of dayOptions">{{day.name}}</option>
+      </select>
+      <select *ngIf="selected == 'Date'" class="form-control mr-sm-2 search-bar" [(ngModel)]="monthInput" name="attributeOption5">
+        <option *ngFor="let month of monthOptions">{{month.name}}</option>
+      </select>
+      <input *ngIf="selected == 'Type'" class="form-control mr-sm-2 search-bar" type="search" placeholder="Search Item" aria-label="Search Item" [(ngModel)]="itemSearchInput" name="iteminputSearch">
+      <input *ngIf="selected == 'Modifier' " class="form-control mr-sm-2 search-bar" type="search" placeholder="Search User" aria-label="Search User" [(ngModel)]="userSearchInput" name="userinputSearch">
+      <input *ngIf="selected == 'Date' " class="form-control mr-sm-2 search-bar" type="search" placeholder="Enter Year" aria-label="Search Date" [(ngModel)]="dateSearchInput" name="dateinputSearch">
+      <button class="btn my-2 my-sm-0 search-button" (click)="searchLog()" type="submit"><img src="{{SitePath}}/assets/images/icon.png"></button>
+      <button class="Reset" (click)="GetLogs()" type="submit">Reset</button>
+    </form>
+    <div>
+      <p class="no-search" *ngIf="noSearchInput">Search requires input!</p>
+    </div>
+  </div>
+  <div class="d-flex justify-content-center">
+    <div class="table-responsive">
+      <table class="table user-table">
+        <thead>
+          <tr>
+            <th scope="col">Type</th>
+            <th scope="col">Item</th>
+            <th scope="col">Action</th>
+            <th scope="col">Modifier</th>
+            <th scope="col">Role</th>
+            <th scope="col">Date</th>
+            <th scope="col"></th>
+          </tr>
+        </thead>
+        <tbody id="logtable">
+          <tr *ngFor="let log of Logs | paginate: { itemsPerPage: perPageCount, currentPage: p }; let i = index" ng-style="{'background-color': '#FF5733'}">
+            <td scope="row">{{log.category}}</td>
+            <td scope="row">
+              <a *ngIf="log.category == 'Media' ||  log.category == 'Comment'" href="/#/media/{{log.mediaID}}">{{log.item}}</a>
+              <a *ngIf="log.category=='Channel'" href="/#/category;channelId={{log.mediaID}}"> {{log.item}}</a>
+              <a *ngIf="log.category=='User'">{{log.item}}</a>
+            </td>
+            <td scope="row" (click)="openchangeDialog(log.id)">{{log.change}}</td>
+            <td scope="row">{{log.username}}</td>
+            <td scope="row">{{log.userRole}}</td>
+            <td scope="row">{{log.changeDate}}</td>
+            <td scope="row"><button class="revert" *ngIf="log.reverted == false" (click)="Revert(i)" type="submit">Revert</button></td>
+            <div *ngIf="log.reverted==true? RevertInit(i):false">;</div>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+  </div>
+  <div class="pagNation mb-5">
+    <pagination-controls class="my-pagination mt-3" (click)="updateIndexPage(p)" (pageChange)="p = $event"></pagination-controls>
+  </div>
+  <h3 class="text-center mb-5" *ngIf="noResults">No results found. Please try another search.</h3>
+</div>

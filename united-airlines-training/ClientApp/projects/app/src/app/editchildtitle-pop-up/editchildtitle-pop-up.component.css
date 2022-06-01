@@ -1,0 +1,15 @@
+button {
+  background-color: #0033A0;
+  border: none;
+  color: white;
+  margin: 1px;
+}
+
+button:hover {
+  background-color: white;
+  color: black;
+}
+
+.sub {
+  background-color: #44883E !important;
+}

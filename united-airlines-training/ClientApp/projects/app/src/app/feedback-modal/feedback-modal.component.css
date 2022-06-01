@@ -1,0 +1,56 @@
+
+
+
+/*Small (sm) devices (landscape phones, 576px and up)*/
+@media (min-width: 576px) {
+}
+
+/*Medium (md) devices (tablets, 768px and up)*/
+@media (min-width: 768px) {
+  mat-dialog-content {
+    height: 100em !important;
+    min-height: 55em !important;
+    width: 40em;
+  }
+}
+
+/*Large (lg) devices (desktops, 992px and up)*/
+@media (min-width: 992px) {
+  mat-dialog-content {
+    height: 100em !important;
+    min-height: 55em !important;
+    width: 50em;
+  }
+}
+
+@media (max-height: 1000px) {
+  mat-dialog-content {
+    height: 100em !important;
+    min-height: 45em !important;
+  }
+}
+
+@media (max-height: 800px) {
+  mat-dialog-content {
+    height: 100em !important;
+    min-height: 35em !important;
+  }
+}
+
+/*Extra (xl) large devices (large desktops, 1200px and up)*/
+@media (min-width: 1200px) {
+  mat-dialog-content {
+    height: 100em !important;
+    min-height: 55em !important;
+    width: 60em;
+  }
+}
+
+/*Extra (xl) large devices (large desktops, 1200px and up)*/
+@media (min-width: 1400px) {
+  mat-dialog-content {
+    height: 100em !important;
+    min-height: 55em !important;
+    width: 80em;
+  }
+}

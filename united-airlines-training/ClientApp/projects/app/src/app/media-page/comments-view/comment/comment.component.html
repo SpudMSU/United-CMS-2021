@@ -1,0 +1,65 @@
+<div class="row">
+  <div style="margin-bottom: 5px" class="col">
+    <div class="row">
+      <div class="col offset-{{offset}}">
+        <div class="row">
+          <div class="col-9">
+            <div class="poster" *ngIf="poster">{{poster.firstName}} {{poster.lastName}}</div>
+          </div>
+          <div class="col-1 ml-auto" *ngIf="!comment.queued && !isThreaded">
+            <div title="Reply" (click)="toggleReplyFieldShown()" class="replyIconWrapper"><i class="material-icons replyIcon">reply</i></div>
+          </div>
+          <div class="col-1 ml-auto" *ngIf="comment.queued">
+            <div title="Approve Comment" (click)="onApproveClicked()" class="approveWrapper"><i class="material-icons approveIcon">check</i></div>
+          </div>
+          <div class="col-1" [ngClass]="{'ml-auto': isThreaded}" *ngIf="currentUserComment || comment.queued">
+            <div title="Delete Comment" class="deleteWrapper" (click)="onDeleteClicked()"><i class="material-icons deleteIcon">delete</i></div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col">
+            <div class="commentBody">{{comment.description}}</div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col">
+            <div class="commentDate">{{postDateString}}</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div *ngIf="replyInputShown">
+      <div class="row">
+        <div class="col">
+          <textarea id="reply-input" [(ngModel)]="replyText" rows="3" placeholder="Reply..."></textarea>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+          <button style="margin-right: 6px" type="button" (click)="onReplySubmitClicked()" class="btn btn-primary">Submit</button>
+          <button type="button" (click)="cancelReply()" class="btn btn-danger">Cancel</button>
+        </div>
+      </div>
+    </div>
+    <div class="row" *ngIf="(comment.ThreadedComments != undefined && comment.ThreadedComments != null) && comment.ThreadedComments.length > 0">
+      <div class="col">
+        <button type="button" *ngIf="!repliesVisible" (click)="toggleRepliesShown()" class="btn btn-link">Show Replies</button>
+        <button type="button" *ngIf="repliesVisible" (click)="toggleRepliesShown()" class="btn btn-link">Hide Replies</button>
+      </div>
+    </div>
+    <div [hidden]="!repliesVisible">
+
+      <app-comment *ngFor="let reply of comment.ThreadedComments"
+                   [comment]="reply"
+                   [currentUser]="currentUser"
+                   [currentUserId]="currentUserId"
+                   [isThreaded]="true"
+                   (onDelete)="onReplyDeleteClicked($event)"></app-comment>
+    </div>
+
+  </div>
+</div>
+
+
+
+<!--<p *ngIf="userComment[i]" class="editComment" (click)="editComment(i)">Edit</p>-->

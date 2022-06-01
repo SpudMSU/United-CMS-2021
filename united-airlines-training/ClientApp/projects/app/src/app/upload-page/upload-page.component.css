@@ -1,0 +1,321 @@
+button {
+    text-align: center;
+}
+
+.PageContent {
+    margin: 0 auto;
+    text-align: center;
+}
+
+#uploadForm {
+/*  margin-bottom: 50px;
+  margin-left: 10em;
+  margin-right: 10em;*/
+}
+
+#uploadForm label {
+    display: block;
+    margin: 10px;
+}
+
+#successText {
+    color: green;
+}
+
+#errorText {
+    color: red;
+}
+
+#selectionList {
+  background-color: aliceblue;
+  height: 200px;
+  overflow-y: auto;
+}
+
+.channelList {
+  list-style-type: none;
+}
+
+.channelList li {
+    margin: 10px;
+}
+
+.minorButton {
+    border: none;
+    border-radius: 8px;
+    margin: 10px;
+    padding: 5px;
+}
+
+.talkLink {
+    list-style-type: none;
+    margin: 5px;
+}
+
+#talkLinkHeader {
+    margin: 15px;
+}
+
+.keywordList {
+    list-style-type: none;
+    margin: 5px;
+}
+
+#talkButton {
+    background-color: aqua;
+    color: white;
+    margin-bottom: 0px;
+}
+
+#talkButton:hover {
+    background-color: darkblue;
+}
+
+#keywordButton {
+    background-color: forestgreen;
+    color: white;
+}
+
+#keywordButton:hover{
+    background-color: blue;
+}
+
+#uploadButton {
+  border: none;
+  border-radius: 8px;
+  color: white;
+  padding: 15px 32px;
+}
+
+#uploadButton:hover {
+    background-color: lawngreen;
+}
+
+.addButton {
+  color: green;
+  background-color: #dcfcd9;
+  border: none;
+}
+
+.addButton:hover {
+    color: black;
+    background-color: darkgray;
+}
+
+.delButton {
+  color: red;
+  background-color: #fcbebd;
+  border: none;
+}
+
+.delButton:hover {
+    color: white;
+    background-color: black;
+}
+
+#descriptionField {
+/*    height: 75px;
+*/}
+
+.specificSection {
+  padding: 30px;
+  background-color: aliceblue;
+  width: 80%;
+  margin: 0 auto;
+}
+
+.flagButton {
+  background-color: #00B2A9;
+  border: none;
+  color: white;
+  margin: 1px;
+}
+
+  .flagButton:hover {
+    background-color: white;
+    color: black;
+  }
+
+  .flagButton:focus {
+    box-shadow: 0px 1px 1px rgba(0, 178, 169, 1) inset, 0px 0px 8px rgba(0, 178, 169, 1);
+  }
+
+.flag-table {
+  margin: auto;
+}
+
+  .flag-table textarea {
+    width: 98%;
+    margin-left: 1%;
+    margin-right: 1%;
+  }
+
+/*Ipads*/
+@media (max-width: 1132px) {
+  #uploadForm {
+      margin-right: 10px;
+      margin-left: 10px;
+  }
+
+  .order-12 {
+      order: unset;
+      flex-basis: unset
+  }
+}
+
+/*Phones*/
+@media (max-width: 575px) {
+
+}
+
+.page_block {
+    margin: 5px;
+    border:solid
+}
+
+.blockTitle {
+    margin: 5px;
+}
+
+.flagAllButton {
+    margin-top: 5px;
+    margin-bottom: 5px;
+    position:relative;
+    float:right;
+}
+
+.pageContainer {
+    margin-right: 0px;
+    margin-left: 0px;
+}
+
+.flagTypeTitle {
+    font-size: 15px;
+    padding: 0px;
+    text-align: center;
+}
+
+.flagTypeInput {
+    padding: 0px;
+}
+
+.flagCol {
+  margin: 5px;
+}
+
+.flag {
+    margin-left: 5px;
+    margin-right: 5px;
+}
+
+#thumbPath {
+    font-size: small !important;
+}
+
+.button-centerer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* CHANNEL CUSTOM CSS */
+.channelWrapper {
+  width: 180px;
+  padding: 5px;
+  border-radius: 7px;
+  border: 1.5px solid #2080df;
+  display: inline-block;
+  font-size: small;
+}
+
+.channelCol {
+    margin-bottom: 5px;
+}
+
+.channelArrow {
+    font-size: 2.5em;
+}
+
+.channelArrowWrapper {
+    display: inline-block;
+    position: absolute;
+}
+
+.channelName {
+    display: inline-block;
+    width: 85%
+}
+
+.channelCheck {
+    display: inline-block;
+    position: absolute;
+    float: right;
+}
+
+/* KEYWORD STUFF */
+.keywordWrapper {
+    display: inline-block;
+    padding: 2px;
+
+    margin: 0px 10px;
+}
+
+.keywordDeleteButton:hover {
+    cursor: pointer;
+}
+
+.keywordContent {
+    display: inline;
+    float: left;
+}
+
+/* FLAG STUFF */
+.flagContent {
+    font-size: small;
+    display: inline-block;
+}
+
+.flagDelete {
+    display: inline-block;
+
+    /* CHANGE THIS */
+    position: absolute;
+}
+
+.flagDeleteButton:hover {
+    cursor: pointer;
+}
+
+.flagWrapper {
+    width: 100%;
+}
+
+.submissionButton {
+    margin: 0px 5px;
+}
+
+.success-notification {
+    margin-top: 10px;
+    margin-left: 5px;
+}
+
+.eventLink {
+    margin-bottom: 0px;
+}
+
+.event-title {
+    font-weight: 500;
+    font-size: larger;
+}
+
+.eventDateTime {
+    margin-bottom: 0px;
+}
+
+.event-block {
+    margin-bottom: 10px;
+}
+
+.sessionInputTitle {
+
+}

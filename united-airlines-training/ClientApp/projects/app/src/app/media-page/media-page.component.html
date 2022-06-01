@@ -1,0 +1,141 @@
+<div class="MediaPage">
+  <div class="PageHalf leftHalf" *ngIf="selectedMedia.mediaTypeID != 5 && mediaLoaded">
+    <!--The little window on the page where media will be displayed inside-->
+    <section id="MediaViewerBlock">
+      <!--PDF Files-->
+      <div *ngIf="selectedMedia.mediaTypeID == 1" class="MediaWindow">
+        <iframe [src]="this.PDFpath | safe"></iframe>
+      </div>
+      <!--Video Files-->
+      <div *ngIf="selectedMedia.mediaTypeID == 2" class="MediaWindow" id="VideoViewerVariant">
+        <video [autoplay]="this.autoplayVideos" #videoPlayerElement controls="" style="max-width: 100%;" id="VideoPlayer" ngDefaultControl [(ngModel)]="videoPlayer">
+          <source [src]="(this.SitePath + this.selectedMedia.path) | safe" type="video/mp4" />
+        </video>
+      </div>
+      <!--HTML Files-->
+      <div *ngIf="selectedMedia.mediaTypeID == 3" class="MediaWindow">
+        <iframe [src]="(this.SitePath + this.selectedMedia.path) | safe"></iframe>
+      </div>
+      <!--Training Manuals-->
+      <div *ngIf="selectedMedia.mediaTypeID == 4" class="MediaWindow">
+        <div class="NonDisplayMedia">
+          <div class="tabLinkContainer">
+            <a class="linkButton" (click)="openTabLink();">Open Training Manual</a>
+          </div>
+        </div>
+      </div>
+
+      <!--External Links-->
+      <div *ngIf="selectedMedia.mediaTypeID == 6" class="MediaWindow" id="ELinkViewerVariant">
+        <iframe width="560" height="315" [src]="this.selectedMedia.path | safe" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+      </div>
+      <!--A footer below the media window with some additional controls-->
+      <footer *ngIf="this.selectedMedia.mediaTypeID < 4 || this.selectedMedia.mediaTypeID == 6">
+        <button (click)="openDialog()">Pop out</button>
+        <button *ngIf="this.selectedMedia.mediaTypeID != 2" (click)="openTabLink()">Open in new tab</button>
+      </footer>
+    </section>
+
+  </div>
+  <!--The half of the page to hold all the video information (title, description, etc.)-->
+  <div [ngClass]="{'leftHalf' : this.selectedMedia.mediaTypeID == 5, 'rightHalf': this.selectedMedia.mediaTypeID != 5}" class="PageHalf" >
+    <section>
+      <h1 *ngIf="this.editTitle == false;" id="mediaTitle">{{this.selectedMedia.title}}</h1>
+      <textarea class="editField" *ngIf="this.editTitle == true" rows="1" [(ngModel)]="tmpTitle"></textarea>
+      <!--Edit buttons for the title that only get displayed to the appropriate role level-->
+      <div class="editIcons">
+        <i *ngIf="this.editTitle == false && this.roleCodeLevel > 2" class="material-icons" (click)="this.editTitle = true; this.tmpTitle = this.selectedMedia.title;">create</i>
+        <i *ngIf="this.editTitle == true;" class="material-icons" style="color: green; background-color: #dcfcd9;" (click)="updateTitle();">done</i>
+        <i *ngIf="this.editTitle == true;" class="material-icons" style="color: red; background-color: #fcbebd;" (click)="this.editTitle = false;">clear</i>
+      </div>
+      <h5 class="media-id">Media ID: {{this.selectedMedia.mediaID}}</h5>
+      <h6 *ngIf="this.selectedMedia.mediaTypeID == 1"><i title="PDF" class="material-icons icon-size">library_books</i>PDF</h6>
+      <h6 *ngIf="this.selectedMedia.mediaTypeID == 2"><i title="MP4 Video" class="material-icons icon-size">ondemand_video</i>MP4 Video</h6>
+      <h6 *ngIf="this.selectedMedia.mediaTypeID == 3"><i title="HTML" class="material-icons icon-size">video_label</i>HTML</h6>
+      <h6 *ngIf="this.selectedMedia.mediaTypeID == 4"><i title="Training Manual" class="material-icons icon-size">folder</i>Training Manual</h6>
+      <h6 *ngIf="this.selectedMedia.mediaTypeID == 5"><i title="Distance Learning" class="material-icons icon-size">person</i>Distance Learning</h6>
+      <h6 *ngIf="this.selectedMedia.mediaTypeID == 6"><i title="External Link" class="material-icons icon-size">language</i>External Link</h6>
+    </section>
+    <section>
+      <h2>{{this.curViewCount}} Views</h2>
+      <h3 class="UploadInfoText">Uploaded {{convertUploadDate(this.selectedMedia["createdAt"])}}</h3>
+      <div class="LikeContainer">
+        <h3 class="LikeDisplay"><i class="material-icons" (click)="clickLike()" [style.color]="curLiked ? 'green': ''">thumb_up</i><em style="color: green;">{{this.curLikes}}</em> Likes</h3>
+        <h3 class="LikeDisplay"><i class="material-icons" (click)="clickDislike()" [style.color]="curDisliked ? 'red': ''">thumb_down</i><em style="color: red;">{{this.curDislikes}}</em> Dislikes</h3>
+      </div>
+    </section>
+    <section class="mb-3">
+      <button class="btn mr-4" (click)="openFeedbackDialog()"><i class="material-icons">feedback</i>  Send Feedback</button>
+      <button *ngIf="this.roleCodeLevel > 1" class="btn" routerLink="/report/media/{{encodeVal(this.selectedMedia.mediaID)}}"><i class="material-icons">insert_chart</i>  Generate Report</button>
+    </section>
+    <section>
+      <h2>Media Description</h2>
+      <!--Edit buttons for the description that only get displayed to the appropriate role level-->
+      <div class="editIcons">
+        <i *ngIf="this.editDesc == false && this.roleCodeLevel > 2" class="material-icons" (click)="this.editDesc = true; this.tmpDesc = this.selectedMedia.description;">create</i>
+        <i *ngIf="this.editDesc == true;" class="material-icons" style="    color: green; background-color: #dcfcd9;" (click)="updateDesc();">done</i>
+        <i *ngIf="this.editDesc == true;" class="material-icons" style="color: red; background-color: #fcbebd;" (click)="this.editDesc = false;">clear</i>
+      </div>
+      <p *ngIf="this.editDesc == false">{{this.selectedMedia.description}}</p>
+      <textarea class="editField" *ngIf="this.editDesc == true" rows="3" cols="55" [(ngModel)]="tmpDesc"></textarea>
+    </section>
+    <!--Section to display related media (but only if there are related media items to show)-->
+    <section class="space" *ngIf="selectedMedia.mediaTypeID != 5">
+      <h2>Related Media</h2>
+      <div *ngIf="related.length > 0">
+        <div class="RelatedMediaItem" *ngFor="let mediaItem of displayRelated;" routerLink="/media/{{mediaItem.mediaID}}">
+          <img src="{{SitePath + mediaItem.thumbnailPath}}" class="Thumbnail" />
+          <h4 class="RelatedTitle">{{mediaItem.title}}</h4>
+        </div>
+      </div>
+      <div style="text-align: center" *ngIf="related.length == 0">
+        <div class="loader-spinner">
+          <div class="spinner-border loading-spinner m-5" role="status">
+            <span class="sr-only">Loading...</span>
+          </div>
+        </div>
+      </div>
+
+    </section>
+  </div>
+
+  <div class="PageHalf rightHalf" *ngIf="selectedMedia.mediaTypeID == 5 && mediaLoaded">
+    <app-distance-learning-content [media]="selectedMedia"
+                                   [editable]="roleCodeLevel >= 3"></app-distance-learning-content>
+
+    <section class="space" *ngIf="selectedMedia.mediaTypeID == 5">
+      <h2>Related Media</h2>
+      <div *ngIf="related.length > 0">
+        <div class="RelatedMediaItem" *ngFor="let mediaItem of displayRelated;" routerLink="/media/{{mediaItem.mediaID}}">
+          <img src="{{SitePath + mediaItem.thumbnailPath}}" class="Thumbnail" />
+          <h4 class="RelatedTitle">{{mediaItem.title}}</h4>
+        </div>
+      </div>
+      <div style="text-align: center" *ngIf="related.length == 0">
+        <div class="loader-spinner">
+          <div class="spinner-border loading-spinner m-5" role="status">
+            <span class="sr-only">Loading...</span>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <!--Part of the page which displays comments-->
+  <!-- TODO: shift this back to the bottom so doesn't mess w/ mobile flow -->
+  <div class="PageHalf leftHalf" *ngIf="!commentingEnabled && commentingDisabledBannerVisible">
+    <section>
+      <h4>{{commentingDisabledBanner}}</h4>
+    </section>
+  </div>
+  <div class="PageHalf leftHalf" id="CommentsDiv" *ngIf="commentsSectionLoaded && commentingEnabled">
+    <app-comments-view #commentsView
+                       [currentUser]="currentUser"
+                       [currentUserId]="uid"
+                       [selectedMedia]="selectedMedia"
+                       [autoApprove]="commentingAutoApprove"></app-comments-view>
+
+  </div>
+
+  <br />
+</div>

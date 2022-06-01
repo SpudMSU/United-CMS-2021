@@ -1,0 +1,32 @@
+<body>
+  <!-- Header -->
+  <div class="header">
+    <a href="#">
+      <img
+           alt="United Airlines Logo"
+           src='{{SitePath}}/assets/images/United logo white-01.png' />
+    </a>
+
+    <span id="SiteTitle">Tech Ops Training</span>
+
+    <div class="search-bar">
+      <!--<form>
+      <select (change)="setSearchType($event)">
+        <option value="media">Media</option>
+        <option value="channels">Channels</option>
+      </select>
+      </form>-->
+      <div class="role">
+        <p *ngIf="role == 1">User Level: Guest</p>
+        <p *ngIf="role == 2">User Level: Moderator</p>
+        <p *ngIf="role == 3">User Level: Contributor</p>
+        <p *ngIf="role == 4">User Level: Administrator</p>
+      </div>
+      <div class="search">
+        <input type="text" class="Term" [(ngModel)]="searchText" placeholder="Search site for media" (keyup.enter)="search()">
+        <button type="submit" class="search-button"><img src="{{SitePath}}/assets/images/icon.png" (click)="search()"></button>
+      </div>
+    </div>
+
+  </div>
+</body>

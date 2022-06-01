@@ -1,0 +1,214 @@
+<div class="row" style="min-height: 80vh">
+  <div class="column">
+    <div class="content-left">
+      <h2 class="mb-2 mt-2">Administer Media</h2>
+      <div class="searchWindow">
+        <p>Search for a media item to edit</p>
+        <div class="search">
+          <input type="text" class="Term" [(ngModel)]="searchText" placeholder="Media Keywords" (keyup.enter)="searchMedia()">
+          <button type="submit" class="search-button" (click)="searchMedia()">
+            <img src="{{SitePath}}/assets/images/icon.png">
+          </button>
+        </div>
+        <div>
+          <p class="no-search" *ngIf="hasSearchError">{{searchErrorText}}</p>
+        </div>
+      </div>
+      <div class="d-flex justify-content-center">
+        <table class="table media-table">
+          <thead>
+            <tr>
+              <th scope="col">Title</th>
+              <th scope="col">Type</th>
+              <th scope="col">Date Created</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let media of returnedMedia | paginate: { itemsPerPage: perPageCount, currentPage: p }; let i = index">
+              <td scope="row">{{media.title}}</td>
+              <td scope="row">{{mediaTypeString(media.mediaTypeID)}}</td>
+              <td scope="row">{{convertUTCDateToLocalDate(media["createdAt"])}}</td>
+              <td><button class="material-icons editanddelete" (click)="selectMedia(media)">edit</button></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="pagNation mb-5">
+        <pagination-controls class="my-pagination mt-3" (click)="updateIndexPage(p)" (pageChange)="p = $event"></pagination-controls>
+      </div>
+    </div>
+  </div>
+
+  <div class="column">
+    <div class="content-right" id="col2">
+      <form id="editForm" *ngIf="this.mediaHasBeenSelected" onkeydown="return event.key != 'Enter';">
+        <p *ngFor="let e of errorTexts" id="errorText">{{e}}</p>
+        <ul>
+          <li>
+            <ul class="horizontal-list">
+              <li class="left-pair" style="width: 60%">
+                <label style="font-weight: bold; width: 90%">
+                  Title:
+                  <input type="text" id="curTitle" name="curTitle" [(ngModel)]="selectedMedia.title" style="font-weight: initial" />
+                </label>
+              </li>
+              <li class="right-pair" style="width: 32%">
+                <ul class="horizontal-list">
+                  <li class="save-changes">
+                    <button (click)="saveChanges()">Save Changes</button>
+                  </li>
+                  <li>
+                    <button *ngIf="mediaIsRetired == false" class="btn btn-danger" (click)="ToggleRetired(true)">Retire Media</button>
+                    <button *ngIf="mediaIsRetired" class="btn btn-success" (click)="ToggleRetired(false)">Un-retire</button>
+                  </li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+          <li>
+            <ul class="horizontal-list">
+              <li class="left-third">
+                <div>Description:</div>
+              </li>
+              <li class="right-two-thirds">
+                <textarea rows="6" cols="40" name="curDescription" [(ngModel)]="selectedMedia.description"></textarea>
+              </li>
+            </ul>
+          </li>
+          <li>
+            <label *ngIf="this.selectedMedia.mediaTypeID < 5" style="font-weight: bold">
+              Media File Path:
+              <input type="text" id="filePath" class="form-control" name="path" [(ngModel)]="selectedMedia.path" />
+            </label>
+            <div *ngIf="this.selectedMedia.mediaTypeID == 5" class="blue-border">
+              <label style="font-weight: bold">
+                Add Tech Talk Link:
+                <input id="urlInput" class="form-control" type="url" />
+              </label>
+              <label>
+                Date:
+                <input id="dateInput" class="form-control" type="date" />
+              </label>
+              <label>
+                Time:
+                <input id="timeInput" class="form-control" type="time" />
+              </label>
+              <button class="minorButton" id="talkButton" (click)="AddTalkLink();">Add Link</button>
+              <ul>
+                <li *ngFor="let t of talks; let i = index;">
+                  {{t.urlPath}} {{t.eventTime | date:'short'}}
+                  <button (click)="RemoveTalkLink(i);" class="remove-button"><i class="material-icons delete-button">delete</i></button>
+                </li>
+              </ul>
+            </div>
+            <label *ngIf="this.selectedMedia.mediaTypeID == 6" style="font-weight: bold">
+              URL:
+              <input type="text" id="path" class="form-control" name="path" [(ngModel)]="selectedMedia.path" />
+            </label>
+            <label style="font-weight: bold">
+              Thumbnail URL:
+              <input type="text" id="thumbnailPath" class="form-control" name="thumbnailPath" [(ngModel)]="selectedMedia.thumbnailPath" />
+            </label>
+          </li>
+          <li class="blue-border">
+            <label>
+              Add Keywords to this item
+              <input id="keywordInput" type="text" (keyup.enter)="AddKeywordString()">
+              <button (click)="AddKeywordString()">Add</button>
+            </label>
+            <ul style="vertical-align: baseline">
+              <li *ngFor="let word of keywordStrings; let i = index;" class="keyword">
+                <span style="vertical-align: central">{{word}}</span>
+                <button (click)="RemoveKeywordString(i)" class="remove-button" style="vertical-align: bottom">
+                  <i class="material-icons delete-button" style="vertical-align: bottom">delete</i>
+                </button>
+              </li>
+            </ul>
+          </li>
+          <li class="blue-border">
+            <h2 style="text-align: center">Flags:</h2>
+            <button *ngIf="mediaIsFlaggedForAll" (click)="ToggleFlaggedAllUsers(false)">Unflag for all users</button>
+            <button *ngIf="mediaIsFlaggedForAll == false" (click)="ToggleFlaggedAllUsers(true)">Flag for all users</button>
+            <table class="flag-table">
+              <tr>
+                <td>
+                  <p>Locations:</p>
+                  <textarea rows="3" cols="35" name="flaggedLocations" [(ngModel)]="selectedMedia.flaggedLocations" placeholder="Comma Seperated Location Codes"></textarea>
+                </td>
+                <td>
+                  <p>
+                    Job Codes:
+                  </p>
+                  <textarea rows="3" cols="35" name="flaggedJobCodes" [(ngModel)]="selectedMedia.flaggedJobCodes" placeholder="Comma Seperated Job Codes"></textarea>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    Job Groups:
+                  </p>
+                  <textarea rows="3" cols="35" name="flaggedJobGroups" [(ngModel)]="selectedMedia.flaggedJobGroups" placeholder="Comma Seperated Group Codes"></textarea>
+                </td>
+                <td>
+                  <p>
+                    Departments:
+                  </p>
+                  <textarea rows="3" cols="35" name="flaggedDepartments" [(ngModel)]="selectedMedia.flaggedDepartments" placeholder="Comma Seperated Department Codes"></textarea>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    Cost Centers:
+                  </p>
+                  <textarea rows="3" cols="35" name="flaggedCostCenters" [(ngModel)]="selectedMedia.flaggedCostCenters" placeholder="Comma Seperated Cost Center Codes"></textarea>
+                </td>
+              </tr>
+            </table>
+          </li>
+          <li>
+            <ul class="horizontal-list">
+              <li class="left-pair">
+                <div class="vertical-item">
+                  <h4>Select Channels to add item to:</h4>
+                  <ul class="channelList">
+                    <li *ngFor="let c of selectableChannels;">
+                      {{c.title}}
+                      <button (click)="AddChannel(c)" class="add-button"><i class="material-icons add-button">add_circle</i></button>
+                    </li>
+                  </ul>
+                </div>
+              </li>
+              <li class="right-pair">
+                <div class="vertical-item">
+                  <h4>Selected Channels:</h4>
+                  <p *ngIf="this.channelsOfSelected.length == 0">No channels selected</p>
+                  <ul class="channelList">
+                    <li *ngFor="let u of channelsOfSelected; let i = index;">
+                      {{u.title}}
+                      <button (click)="RemoveChannel(i)" class="remove-button">
+                        <i class="material-icons delete-button">delete</i>
+                      </button>
+                    </li>
+                  </ul>
+                </div>
+              </li>
+            </ul>
+          </li>
+          <li>
+            <ul class="horizontal-list">
+              <li></li>
+              <li class="save-changes">
+                <button (click)="saveChanges()">Save Changes</button>
+              </li>
+              <li>
+                <button *ngIf="mediaIsRetired == false" class="btn btn-danger" (click)="ToggleRetired(true)">Retire Media</button>
+                <button *ngIf="mediaIsRetired" class="btn btn-success" (click)="ToggleRetired(false)">Un-retire</button>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </form>
+    </div>
+  </div>
+</div>

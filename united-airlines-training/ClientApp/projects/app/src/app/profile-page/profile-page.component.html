@@ -1,0 +1,126 @@
+
+  <div class="row">
+    <div class="col-md-12 text-center mt-4">
+      <h2 class="mb-5">About Me</h2>
+      <p><b>Name: </b>{{this.user.firstName}} {{this.user.lastName}}</p>
+      <p><b>Email: </b>{{this.user.email}}</p>
+      <p><b>User ID: </b>{{this.user['uid']}}</p>
+      <p><b>Current Role: </b>{{this.user.roleCode}}</p>
+      <p><b>Employment Status: </b>{{this.user.employmentStatus}}</p>
+      <p><b>Company: </b>{{this.user.company}}</p>
+      <p><b>Occuptation Title: </b>{{this.user.occupationTitle}}</p>
+      <p><b>Department: </b>{{this.user.department}}</p>
+      <p><b>Cost Center: </b>{{this.user.costcenter}}</p>
+    </div>
+  </div>
+
+
+<!--<body>
+  <div id="col">
+    <div id="box">
+      <h2>About Me</h2>
+      <p><b>Name: </b>{{this.user.firstName}} {{this.user.lastName}}</p>
+      <p><b>Email: </b>{{this.user.email}}</p>
+      <p><b>User ID: </b>{{this.user['uid']}}</p>
+      <p><b>Current Role: </b>{{this.user.roleCode}}</p>
+      <p><b>Employment Status: </b>{{this.user.employmentStatus}}</p>
+      <p><b>Company: </b>{{this.user.company}}</p>
+      <p><b>Occuptation Title: </b>{{this.user.occupationTitle}}</p>
+      <p><b>Department: </b>{{this.user.department}}</p>
+      <p><b>Cost Center: </b></p>
+    </div>
+  </div>
+</body>-->
+
+<!--<div id="box">
+    <h2>Analytics Report</h2>
+    <div id="report">
+      <div class="d-sm-flex flex-sm-row justify-content-sm-around">
+        <div class="margin-diff-left">
+          <div class="card border-primary mb-3" style="width: 10rem; height: 10rem;">
+            <div class="card-header" style="height: 4em;">
+              <h5 class="card-title text-center">Total Ratings</h5>
+              <div class="icon-info tooltips">
+                <i class="material-icons">info_outline</i><span class="tooltipstext">
+                  Total number ratings (likes and dislikes) for the user on all media items.
+                </span>
+              </div>
+            </div>
+            <div class="card-body">
+              <p class="card-text text-center">{{this.ratingCount}}</p>
+            </div>
+          </div>
+        </div>
+        <div class="margin-diff-left">
+          <div class="card border-primary mb-3" style="width: 10rem; height: 10rem;">
+            <div class="card-header" style="height: 4em;">
+              <h5 class="card-title text-center">Total Comments</h5>
+              <div class="icon-info tooltips">
+                <i class="material-icons">info_outline</i><span class="tooltipstext">
+                  Total number of comments the user has made on all media items.
+                </span>
+              </div>
+            </div>
+            <div class="card-body">
+              <p class="card-text text-center">{{this.commentCount}}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="text-center">
+      <a href="http://localhost:5000/#/report/user/u085461" class="btn btn-secondary btn-sm" role="button">View Full Analytics Report</a>
+    </div>
+  </div>
+</div>
+
+<div id="col">
+  <div id="box">
+    <h2>Manage Comments</h2>
+    <div *ngFor="let comment of commentList | slice:0:3; let i=index">
+      <p><b>Comment: </b>{{comment.description}}</p>
+    </div>
+  </div>
+  <div id="box">
+    <h2>Manage Likes</h2>
+      <ul class="mediaList" *ngFor="let media of mediaList | slice:0:3; let i=index">
+      <li>
+        <div class="mediaLink">
+          <img class="thumbnail" routerLink="/media/{{media.mediaID}}" src="{{SitePath + media.thumbnailPath}}" width="160" height="120" />
+          <h6 title="{{media.title}}" routerLink="/media/{{media.mediaID}}">{{media.title}}</h6>
+        </div>
+      </li>
+    </ul>
+  </div>
+</div>
+
+<div id="col">
+  <div id="box">
+    <h2>Bookmarked Media</h2>
+
+    <div class="lst">
+      <ul class="mediaList" *ngFor="let mediaItem of recommended | slice:0:3; let i=index">
+        <li>
+          <div class="mediaLink">-->
+<!--(click)=""-->
+<!--<img class="thumbnail" routerLink="/media/{{mediaItem.mediaID}}" src="{{SitePath + mediaItem.thumbnailPath}}" width="160" height="120" />
+<h6 title="{{mediaItem.title}}" routerLink="/media/{{mediaItem.mediaID}}">{{mediaItem.title}}</h6>
+<footer>-->
+<!--<button *ngIf="mediaItem.mediaTypeID < 4" (click)="openDialog();">Pop Out</button>-->
+<!--<span *ngIf="mediaItem.mediaTypeID == 1"><i title="PDF" class="material-icons icon-size">library_books</i>PDF</span>
+            <span *ngIf="mediaItem.mediaTypeID == 2"><i title="MP4 Video" class="material-icons icon-size">ondemand_video</i>Video</span>
+            <span *ngIf="mediaItem.mediaTypeID == 3"><i title="HTML" class="material-icons icon-size">video_label</i>HTML</span>
+            <span *ngIf="mediaItem.mediaTypeID == 4"><i title="Training Manual" class="material-icons icon-size">folder</i>Manual</span>
+            <span *ngIf="mediaItem.mediaTypeID == 5"><i title="Tech Talk" class="material-icons icon-size">person</i>Talk</span>
+            <span *ngIf="mediaItem.mediaTypeID == 6"><i title="External Link" class="material-icons icon-size">language</i>Link</span>
+          </footer>
+        </div>
+      </li>
+    </ul>
+
+    <div class="text-center">
+      <a href="http://localhost:5000/#/home" class="btn btn-secondary btn-sm" role="button">View All Bookmarked Media Items</a>
+    </div>
+
+  </div>
+</div>-->

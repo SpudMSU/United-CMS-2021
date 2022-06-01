@@ -1,0 +1,122 @@
+.Main {
+  width: 97.5%;
+  height: 70%;
+  padding: 0px;
+  position: relative;
+  margin-top: 10px;
+  background-color: #FFFFFF;
+  border-radius: 10px;
+  float: left;
+  margin-bottom: 100px;
+}
+
+
+button {
+  background-color: #00B2A9;
+  border: none;
+  color: white;
+  margin: 1px;
+}
+
+button:hover {
+  background-color: white;
+  color: black;
+}
+
+
+.thumbnail {
+  width: 100%;
+  height: 120px;
+  object-fit: cover;
+}
+
+
+.categoryHeader {
+  margin-top: 20px;
+  border-bottom: black 1px solid;
+}
+
+.lst {
+  margin-top: 10px;
+}
+.lst ul{
+}
+  .lst ul li {
+    list-style: none;
+    display: inline;
+    float: left;
+    width: 160px;
+    margin-top: 20px;
+    margin-right: 3.5%;
+    margin-bottom: 0px;
+    margin-left: 20px;
+    text-align: center;
+  }
+    .lst ul li img {
+      padding: 1px;
+      border: 1px solid groove;
+      margin-bottom: 3px;
+      display: block;
+    }
+    .lst ul li p{
+      height:60px;
+    }
+
+.cate {
+  width: 100%;
+  float: left;
+}
+
+.mediaLink {
+  cursor: pointer;
+  background-color: aliceblue;
+  padding: 2px;
+  border-bottom: solid 2px black;
+}
+
+  .mediaLink:hover {
+    background-color: #dadada;
+  }
+
+.mediaLink h6 {
+    height: 40px;
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+
+.mediaLink footer {
+    
+}
+
+.mediaLink i {
+    margin-right: 5px;
+}
+
+.space {
+    margin-bottom: 8em;
+}
+
+/*Ipads*/
+@media (max-width: 1132px) {
+  
+}
+
+/*Phones*/
+@media (max-width: 567px) {
+  .lst ul li {
+    width: 100%;
+    margin-right: 0px;
+    margin-left: 0px;
+  }
+}
+
+.badge-icon {
+    display: inline-block;
+    float: left;
+    margin-right: 0px !important;
+}
+
+.footer-title {
+    display: inline-block;
+}
+

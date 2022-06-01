@@ -1,0 +1,9 @@
+section {
+  background-color: #F6F7FF;
+  margin: 15px;
+  padding: 8px;
+}
+
+#commentWriter {
+    width: 90%;
+}

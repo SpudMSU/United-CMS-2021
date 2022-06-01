@@ -1,0 +1,684 @@
+<form id="uploadForm" (keydown.enter)="$event.preventDefault()">
+
+  <!-- Page-wide Notification banners -->
+
+  <!-- Error Texts -->
+  <div *ngIf="errorTexts.length > 0">
+    <div class="row" *ngFor="let error of errorTexts">
+      <div class="col">
+        <h5 style="color: red"><i>{{error}}</i></h5>
+      </div>
+    </div>
+  </div>
+
+  <!-- Submission message -->
+  <div class="row" *ngIf="submissionMsg != ''">
+    <div class="col success-notification">
+      <h5 style="color: green"><i>{{submissionMsg}}</i></h5>
+    </div>
+  </div>
+
+  <!-- Page content row -->
+  <div class="row pageContainer">
+
+    <!-- Right half -->
+    <div class="col order-12">
+
+      <!-- Title / Description -->
+      <div class="row">
+        <div class="col page_block">
+
+          <!-- Title -->
+          <div class="row">
+            <div class="col">
+              <label>
+                Title:
+                <input type="text" class="form-control" id="curTitle" name="curTitle" [(ngModel)]="curTitle" autocomplete="off" />
+              </label>
+            </div>
+          </div>
+
+          <!-- Description -->
+          <div class="row">
+            <div class="col">
+              <label>
+                Description:
+                <br />
+                <textarea class="form-control" name="curDescription" [(ngModel)]="curDescription" id="descriptionField" rows="3"></textarea>
+              </label>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- Keywords block -->
+      <div class="row">
+        <div class="col page_block">
+
+          <!-- Keywords title -->
+          <div class="row">
+            <div class="col">
+              <h3 class="blockTitle">Keywords</h3>
+            </div>
+          </div>
+
+          <!-- Keywords content -->
+          <div class="row">
+            <div class="col">
+              <div class="row" style="margin-bottom: 10px;">
+                <div class="col-4">
+                  <div class="ng-autocomplete" style="display: inline">
+                    <ng-autocomplete #keywordAutocomplete
+                                     placeholder="Add Keyword..."
+                                     [data]="allKeywords"
+                                     [searchKeyword]="null"
+                                     (selected)="onKeywordSelected($event)"
+                                     (keydown.enter)="onKeywordEnterHit($event)"
+                                     [itemTemplate]="itemTemplate">
+                    </ng-autocomplete>
+
+                    <ng-template #itemTemplate let-item>
+                      <a [innerHTML]="item"></a>
+                    </ng-template>
+                  </div>
+                  <!--<input id="keywordInput" type="text" class="form-control" (keyup.enter)="AddKeywordString()" placeholder="Add Keyword..." autocomplete="off" />-->
+
+                </div>
+
+                <!-- Current keywords section -->
+                <div class="col-8" style="overflow: auto">
+                  <div class="keywordWrapper" *ngFor="let keyword of keywordStrings">
+                    <div class="keywordContent">
+                      {{keyword}}
+                    </div>
+                    <span class="material-icons keywordDeleteButton" (click)="RemoveKeywordString(keyword)">
+                      delete
+                    </span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Flags -->
+      <div class="row">
+        <div class="col page_block">
+
+          <!-- Header row -->
+          <div class="row">
+
+            <!-- Title -->
+            <div class="col-8">
+              <h3 class="blockTitle">Flags</h3>
+            </div>
+
+            <!-- Flag all button -->
+            <div class="col-4 justify-content-right">
+              <button type="button" class="btn btn-danger flagAllButton" *ngIf="mediaIsFlaggedForAll" (click)="ToggleFlaggedAllUsers(false)">Unflag for all users</button>
+              <button type="button" class="btn btn-primary flagAllButton" *ngIf="mediaIsFlaggedForAll == false" (click)="ToggleFlaggedAllUsers(true)">Flag for all users</button>
+            </div>
+          </div>
+          <div class="row">
+
+            <!-- Locations -->
+            <div class="col flagCol">
+              <div class="row">
+                <div class="col justify-content-center flagTypeTitle">
+                  <p>Locations</p>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col justify-content-center flagTypeInput">
+                  <div class="ng-autocomplete" style="display: inline">
+                    <ng-autocomplete #locationAutocomplete
+                                     placeholder="Add..."
+                                     [data]="distinctLocations"
+                                     [searchKeyword]="null"
+                                     (selected)="onLocationFlagSelected($event)"
+                                     (keyup.enter)="onLocationFlagSelected($event.target.value)"
+                                     [itemTemplate]="locationTemplate">
+                    </ng-autocomplete>
+
+                    <ng-template #locationTemplate let-item>
+                      <a [innerHTML]="item"></a>
+                    </ng-template>
+                  </div>
+                  <!--<input class="form-control" (keyup.enter)="addLocationFlag($event.target)" />-->
+                </div>
+              </div>
+              <!-- TODO: make this not dumb -->
+              <div class="row" *ngFor="let locationFlag of locationFlags">
+                <div class="col">
+                  <div class="flagWrapper">
+                    <div class="flagContent">
+                      {{locationFlag}}
+                    </div>
+                    <div class="flagDelete">
+                      <span class="material-icons flagDeleteButton" (click)="removeLocationFlag(locationFlag)">
+                        delete
+                      </span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Job Codes -->
+            <div class="col flagCol">
+              <div class="row">
+                <div class="col justify-content-center flagTypeTitle">
+                  <p>Job Codes</p>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col justify-content-center flagTypeInput">
+                  <div class="ng-autocomplete" style="display: inline">
+                    <ng-autocomplete #jobCodesAutocomplete
+                                     placeholder="Add..."
+                                     [data]="distinctJobCodes"
+                                     [searchKeyword]="null"
+                                     (selected)="onJobCodeFlagSelected($event)"
+                                     (keydown.enter)="onJobCodeFlagSelected($event.target.value)"
+                                     [itemTemplate]="jobCodeTemplate">
+                    </ng-autocomplete>
+
+                    <ng-template #jobCodeTemplate let-item>
+                      <a [innerHTML]="item"></a>
+                    </ng-template>
+                  </div>
+                  <!--<input class="form-control" (keyup.enter)="addJobCodeFlag($event.target)" />-->
+                </div>
+              </div>
+              <div class="row" *ngFor="let jobCodeFlag of jobCodeFlags">
+                <div class="col">
+                  <div class="flagWrapper">
+                    <div class="flagContent">
+                      {{jobCodeFlag}}
+                    </div>
+                    <div class="flagDelete">
+                      <span class="material-icons flagDeleteButton" (click)="removeJobCodeFlag(jobCodeFlag)">
+                        delete
+                      </span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Job Groups -->
+            <div class="col flagCol">
+              <div class="row">
+                <div class="col justify-content-center flagTypeTitle">
+                  <p>Job Groups</p>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col justify-content-center flagTypeInput">
+                  <div class="ng-autocomplete" style="display: inline">
+                    <ng-autocomplete #jobGroupsAutocomplete
+                                     placeholder="Add..."
+                                     [data]="distinctJobGroups"
+                                     [searchKeyword]="null"
+                                     (selected)="onJobGroupFlagSelected($event)"
+                                     (keydown.enter)="onJobGroupFlagSelected($event.target.value)"
+                                     [itemTemplate]="jobGroupTemplate">
+                    </ng-autocomplete>
+
+                    <ng-template #jobGroupTemplate let-item>
+                      <a [innerHTML]="item"></a>
+                    </ng-template>
+                  </div>
+                  <!--<input class="form-control" (keyup.enter)="addJobGroupFlag($event.target)" />-->
+                </div>
+              </div>
+              <div class="row" *ngFor="let jobGroupFlag of jobGroupFlags">
+                <div class="col">
+                  <div class="flagWrapper">
+                    <div class="flagContent">
+                      {{jobGroupFlag}}
+                    </div>
+                    <div class="flagDelete">
+                      <span class="material-icons flagDeleteButton" (click)="removeJobGroupFlag(jobGroupFlag)">
+                        delete
+                      </span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Departments -->
+            <div class="col flagCol">
+              <div class="row">
+                <div class="col justify-content-center flagTypeTitle">
+                  <p>Departments</p>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col justify-content-center flagTypeInput">
+                  <div class="ng-autocomplete" style="display: inline">
+                    <ng-autocomplete #departmentsAutocomplete
+                                     placeholder="Add..."
+                                     [data]="distinctDepartments"
+                                     [searchKeyword]="null"
+                                     (selected)="onDepartmentFlagSelected($event)"
+                                     (keydown.enter)="onDepartmentFlagSelected($event.target.value)"
+                                     [itemTemplate]="departmentTemplate">
+                    </ng-autocomplete>
+
+                    <ng-template #departmentTemplate let-item>
+                      <a [innerHTML]="item"></a>
+                    </ng-template>
+                  </div>
+                  <!--<input class="form-control" (keyup.enter)="addDepartmentFlag($event.target)" />-->
+                </div>
+              </div>
+
+              <!-- TODO: make this not dumb -->
+              <div class="row" *ngFor="let departmentFlag of departmentFlags">
+                <div class="col">
+                  <div class="flagWrapper">
+                    <div class="flagContent">
+                      {{departmentFlag}}
+                    </div>
+                    <div class="flagDelete">
+                      <span class="material-icons flagDeleteButton" (click)="removeDepartmentFlag(departmentFlag)">
+                        delete
+                      </span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Cost Centers -->
+            <div class="col flagCol">
+              <div class="row">
+                <div class="col justify-content-center flagTypeTitle">
+                  <p>Cost Centers</p>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col justify-content-center flagTypeInput">
+                  <div class="ng-autocomplete" style="display: inline">
+                    <ng-autocomplete #costCentersAutocomplete
+                                     placeholder="Add..."
+                                     [data]="distinctCostCenters"
+                                     [searchKeyword]="null"
+                                     (selected)="onCostCenterFlagSelected($event)"
+                                     (keydown.enter)="onCostCenterFlagSelected($event.target.value)"
+                                     [itemTemplate]="costCenterTemplate">
+                    </ng-autocomplete>
+
+                    <ng-template #costCenterTemplate let-item>
+                      <a [innerHTML]="item"></a>
+                    </ng-template>
+                  </div>
+                  <!--<input class="form-control" (keyup.enter)="addCostCenterFlag($event.target)" />-->
+                </div>
+              </div>
+              <div class="row" *ngFor="let costCenterFlag of costCenterFlags">
+                <div class="col">
+                  <div class="flagWrapper">
+                    <div class="flagContent">
+                      {{costCenterFlag}}
+                    </div>
+                    <div class="flagDelete">
+                      <span class="material-icons flagDeleteButton" (click)="removeCostCenterFlag(costCenterFlag)">
+                        delete
+                      </span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Left half -->
+    <div class="col">
+
+      <!-- Thumbnail -->
+      <div class="row">
+        <div style="padding: 5px;" class="col page_block">
+
+          <div class="row">
+            <div class="col">
+              <h3 class="blockTitle">Thumbnail</h3>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col" *ngIf="thumbNailErrorVisible">
+              <p style="color: red;"><i>{{thumbNailErrorText}}</i></p>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col">
+              <div class="row">
+                <div class="col">
+                  <label>
+                    Media Thumbnail Path:
+                    <input type="text" id="thumbPath" class="form-control" name="thumbPath" [(ngModel)]="thumbPath" (keyup.enter)="onThumbnailAdded($event.target)" />
+                  </label>
+                </div>
+              </div>
+              <!--<div class="row">
+                <div class="col">
+                  <a target="_blank" href="../../StaticFiles">Browse Files</a>
+                </div>
+              </div>-->
+
+            </div>
+            <div class="col">
+              <div class="row">
+                <div class="col">
+                  Thumbnail Preview:
+                </div>
+              </div>
+              <div class="row" *ngIf="thumbNailActive">
+                <div class="col">
+                  <img id="thumbnail" src="{{thumbnailSource}}" width="250" height="187" />
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Content -->
+      <div class="row">
+        <div class="col page_block">
+          <div class="row">
+            <div class="col">
+              <label>
+                Media Type:
+                <select id="mediaTypeDropdown" name="fileType" (change)="SetMediaType($event)">
+                  <option>PDF</option>
+                  <option>Video File</option>
+                  <option>HTML</option>
+                  <option>Training Manual</option>
+                  <option >Distance Learning Session</option>
+                  <option>YouTube/Vimeo Link</option>
+                </select>
+              </label>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col">
+
+              <div [ngSwitch]="this.selectedMediaType">
+
+                <!-- Distance Learning session content -->
+                <div *ngSwitchCase="5">
+                  <div class="row">
+                    <div class="col">
+                      <h4 class="blockTitle">General Information</h4>
+
+                    </div>
+                  </div>
+
+                  <div class="row">
+                    <div class="col">
+                      <label>
+                        Instructions:
+                        <br />
+                        <textarea class="form-control" id="distanceLearningInstructions" rows="3"></textarea>
+                      </label>
+                    </div>
+                  </div>
+
+                  <div class="row">
+                    <div class="col">
+                      <div class="row">
+                        <div class="col">
+                          <label>
+                            Attendance Requirements:
+                            <br />
+                            <input class="form-control" id="distanceLearningAttendanceRequirements" (keyup.enter)="addAttendanceRequirement($event.target)" />
+                          </label>
+                        </div>
+                      </div>
+
+                      <div class="row">
+                        <div class="col">
+                          <div id="distanceLearningAttendanceRequirements">
+                            <ul>
+                              <li *ngIf="attendanceRequirements.length == 0">
+                                No attendance requirements added...
+                              </li>
+                              <li *ngFor="let requirement of attendanceRequirements; let i = index">
+                                <button (click)="deleteAttendanceRequirement(i)">Del</button><a>{{requirement.description}}</a>
+                              </li>
+                            </ul>
+                          </div>
+                        </div>
+                      </div>
+
+                    </div>
+                  </div>
+
+                  <div class="row">
+                    <div class="col">
+                      <h4 class="blockTitle">Add Event</h4>
+                    </div>
+                  </div>
+
+                  <!-- Event Form -->
+                  <div class="row">
+                    <div class="col">
+
+                      <!-- Form -->
+                      <div class="row">
+                        <div class="col">
+
+                          <!-- Event link -->
+                          <div class="row">
+                            <div class="col">
+                              <label class="sessionInputTitle">
+                                Event Link
+                                <input id="urlInput" class="form-control" type="url" />
+                              </label>
+                            </div>
+                          </div>
+
+                          <!-- Start Date -->
+                          <div class="row">
+                            <div class="col">
+                              <div class="row">
+                                <div class="col">
+                                 <h5 style="margin-bottom: 0px; margin-left: 8px;">Start Date</h5>
+                                </div>
+                              </div>
+                              <div class="row">
+                                <div class="col">
+                                  <label>
+                                    Date:
+                                    <input id="startDateInput" class="form-control" type="date" />
+                                  </label>
+                                </div>
+                                <div class="col">
+                                  <label>
+                                    Time:
+                                    <input id="startTimeInput" class="form-control" type="time" />
+                                  </label>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+
+                          <!-- End Date -->
+                          <div class="row">
+                            <div class="col">
+                              <div class="row">
+                                <div class="col">
+                                  <h5 style="margin-bottom: 0px; margin-left: 8px;">End Date</h5>
+                                </div>
+                              </div>
+                              <div class="row">
+                                <div class="col">
+                                  <label>
+                                    Date:
+                                    <input id="endDateInput" class="form-control" type="date" />
+                                  </label>
+                                </div>
+                                <div class="col">
+                                  <label>
+                                    Time:
+                                    <input id="endTimeInput" class="form-control" type="time" />
+                                  </label>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+
+                          <div class="row">
+                            <div style="padding-left: 27px;"class="col">
+                              <div class="form-check">
+                                <input class="form-check-input" type="checkbox" value="" id="passcodeProtectedCheckbox" (change)="distanceLearningPasscodeFormActive = !distanceLearningPasscodeFormActive">
+                                <label class="form-check-label" for="passcodeProtectedCheckbox">
+                                  Passcode Protected?
+                                </label>
+                              </div>
+                            </div>
+                          </div>
+
+                          <div class="row" *ngIf="distanceLearningPasscodeFormActive">
+                            <div class="col">
+                              <label class="sessionInputTitle">
+                                Passcode
+                                <input id="passcodeInput" class="form-control" placeholder="Input Passcode..." />
+                              </label>
+                            </div>
+                          </div>
+
+                        </div>
+                      </div>
+
+                      <div class="row">
+                        <div class="col">
+                          <button class="minorButton" id="talkButton" (click)="AddTalkLink();">Add Link</button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <h4 class="blockTitle">Scheduled Events</h4>
+
+                  <div id="scheduledEvents">
+                    <div *ngIf="talks.length == 0">
+                      <p><i>No Events scheduled...</i></p>
+                    </div>
+                    <app-distance-learning-session-view *ngFor="let session of talks"
+                                                        [session]="session"
+                                                        [editable]="true"
+                                                        [linksEnabled]="true"
+                                                        [passwordViewable]="true"
+                                                        (onDelete)="onDistanceLearningSessionDeleted($event)"
+                                                        ></app-distance-learning-session-view>
+
+                  </div>
+
+                </div>
+
+                <!-- External link content -->
+                <div *ngSwitchCase="6">
+                  <label>
+                    URL:
+                    <input type="url" id="urlPath" class="form-control" name="urlPath" [(ngModel)]="urlPath" />
+                  </label>
+                </div>
+
+                <!-- Everything else content (hardcoded file path) -->
+                <div *ngSwitchDefault>
+                  <div class="row">
+                    <div class="col">
+                      <label>
+                        <p id="fileNotificationBanner"></p>
+                      </label>
+                    </div>
+                  </div>
+                  <label>
+                    Media File Path:
+                    <input style="font-size: small" type="text" id="filePath" class="form-control" name="filePath" (keyup.enter)="onFilePathEntered($event.target)" [(ngModel)]="filePath" autocomplete="off" />
+                  </label>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Channels -->
+      <div class="row">
+        <div class="col page_block">
+
+          <!-- Title -->
+          <div class="row">
+            <div class="col">
+              <h3 class="blockTitle">Channels</h3>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-8">
+
+              <app-channel-subview *ngFor="let channel of selectableChannels"
+                                   [channel]="channel"
+                                   [level]="0"
+                                   [submissionSubject]="submissionSubject"
+                                   [selectedChannelsSubject]="selectedChannelsSubject"
+                                   (channelAdded)="AddChannel($event)"
+                                   (channelRemoved)="RemoveChannel($event)"></app-channel-subview>
+
+            </div>
+            <div class="col-4">
+
+              <div class="row" *ngFor="let textObj of uploadChannelText">
+                <div class="col channelCol">
+                  <div class="channelWrapper">
+                    <!-- If this channel has no parent, just display the title -->
+                    <div class="channelName" *ngIf="!textObj.parent">
+                      {{textObj.text}}
+                    </div>
+
+                    <!-- If this channel DOES have a parent, display the parent title + the title -->
+                    <div class="channelName" *ngIf="textObj.parent != null">
+                      <b>{{textObj.parent}}</b> / {{textObj.text}}
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row" *ngIf="!editing">
+    <div class="col">
+      <button id="uploadButton" class="btn btn-lg btn-success mb-5 submissionButton" (click)="Submit()">Add Media</button>
+    </div>
+  </div>
+
+  <div class="row" *ngIf="editing">
+    <div class="col">
+      <button id="uploadEditButton" class="btn btn-lg btn-success mb-5 submissionButton" (click)="Submit()">Save Changes</button>
+
+      <button *ngIf="commentingEnabled" id="enableCommentingButton" class="btn btn-lg btn-warning mb-5 submissionButton" (click)="toggleCommentingEnabled()">Disable Commenting</button>
+      <button *ngIf="!commentingEnabled" id="enableCommentingButton" class="btn btn-lg btn-info mb-5 submissionButton" (click)="toggleCommentingEnabled()">Enable Commenting</button>
+
+      <button *ngIf="!isEditingMediaRetired"id="retireButton" class="btn btn-lg btn-danger mb-5 submissionButton" (click)="toggleMediaRetired()">Retire</button>
+      <button *ngIf="isEditingMediaRetired"id="retireButton" class="btn btn-lg btn-primary mb-5 submissionButton" (click)="toggleMediaRetired()">Un-Retire</button>
+
+    </div>
+  </div>
+</form>
+
+

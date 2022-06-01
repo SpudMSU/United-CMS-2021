@@ -1,0 +1,67 @@
+<h1 mat-dialog-title class="modal-title">Reject Comment</h1>
+
+<div mat-dialog-content>
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">United ID</th>
+        <th scope="col">Media Title</th>
+        <th scope="col">Media ID</th>
+        <th scope="col">Description</th>
+        <th scope="col">Comment Date</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>{{comment.uid}}</td>
+        <td>{{media.title}}</td>
+        <td>{{comment.mediaID}}</td>
+        <td>{{comment.description}}</td>
+        <td>{{convertUTCDateToLocalDate(comment.createdAt)}}</td>
+      </tr>
+    </tbody>
+  </table>
+  <div class="row formElement">
+    <div class="col">
+      <div class="row">
+        <div class="col">
+          <h6>
+            Why is this comment being rejected?
+          </h6>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+          <!--<label *ngIf="!formComplete" class="dropdownLabel"><i style="color:red">This is a required field</i></label>-->
+          <select (change)="onDropdownSelect($event.target.value)" id="rejectionDropdown">
+            <option></option>
+            <option *ngFor="let reason of reasonsForRejection">{{reason.reason}}</option>
+          </select>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row formElement">
+    <div class="col">
+      <div class="row">
+        <div class="col">
+          <h6>
+            Do you have any additional comments?
+          </h6>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+          <textarea id="optionalAdditionalInfo" rows="3" cols="40"></textarea>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div mat-dialog-actions class="row">
+  <div class="col">
+    <button [disabled]="!formComplete" class="btn btn-md btn-success mb-5 submitButton" (click)="submit()" >Submit</button>
+    <button class="btn btn-md btn-danger mb-5 cancelButton" (click)="cancel()">Cancel</button>
+  </div>
+</div>

@@ -1,0 +1,55 @@
+﻿@using united_airlines_training.Models
+@{
+    var data = ViewBag.emailContent;
+    var user = ViewBag.userContent;
+    var phone = ViewBag.phone;
+    var mediaTitle = ViewBag.mediaTitle;
+    var contact = ViewBag.contact;
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>Test Email</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+</head>
+
+
+<body style="margin: 0; padding: 0;">
+    @if (contact)
+    {
+        <h1>Tech Ops Contact Us Received</h1>
+    }
+    else if (String.IsNullOrEmpty(mediaTitle))
+    {
+        <h1>General Feedback Received</h1>
+    }
+    else
+    {
+        <h1>Media Feedback Received</h1>
+    }
+
+    <p><b>Date Time Stamp:</b> @data.CreatedAt</p>
+    @if (!String.IsNullOrEmpty(mediaTitle))
+    {
+        <p><b>Media Title:</b> @mediaTitle </p>
+    }
+
+    <p><b>United ID:</b> @user.UID</p>
+    <p><b>Last Name:</b> @user.LastName</p>
+    <p><b>First Name:</b> @user.FirstName</p>
+    <p><b>Company Address:</b> @user.LocationCode@user.Department</p>
+    <p><b>Email Address:</b> @user.Email</p>
+    <p><b>Phone Number:</b> @phone</p>
+    @if (contact)
+    {
+        <p><b>Contact Reason:</b> @data.Description</p>
+    }
+    else
+    {
+        <p><b>Feedback or Suggestion:</b> @data.Description</p>
+    }
+
+</body>
+</html>

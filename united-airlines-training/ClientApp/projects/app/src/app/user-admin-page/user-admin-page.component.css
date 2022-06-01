@@ -1,0 +1,79 @@
+.user-table {
+    width: 80%;
+    margin-top: 2em;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.margin-diff-left {
+    margin-left: 10%;
+}
+
+.icon-save {
+  color: #00B2A9;
+  cursor: pointer;
+}
+
+.icon-sm {
+    font-size: 20px;
+}
+
+.no-search {
+    color: red;
+    position: absolute
+}
+
+
+button {
+  background-color: #00B2A9;
+  border: none;
+  color: white;
+  margin: 1px;
+}
+
+button:hover {
+  background-color: white;
+  color: black;
+}
+
+button:focus {
+  box-shadow: 0px 1px 1px rgba(0, 178, 169, 1) inset, 0px 0px 8px rgba(0, 178, 169, 1);
+}
+
+.search-button img {
+  display: flex;
+  height: 25px;
+  width: 25px;
+  margin: 0 auto;
+}
+
+.search-bar {
+  width: 20%;
+}
+
+.form-control:focus {
+  border-color: #00B2A9;
+  box-shadow: 0px 1px 1px rgba(0, 178, 169, 1) inset, 0px 0px 8px rgba(0, 178, 169, 1);
+}
+
+.pagNation {
+  margin-left: 10%;
+}
+
+.my-pagination /deep/ .ngx-pagination .current {
+  background: #00B2A9;
+}
+
+
+/*Phones*/
+@media (max-width: 575px) {
+    .user-table {
+        width: 98%;
+    }
+
+    .form-control {
+        width: 80%;
+    }
+}
+
+

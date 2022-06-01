@@ -1,0 +1,16 @@
+<h2 mat-dialog-title>{{data.title}}</h2>
+
+<mat-dialog-content>
+  <!--Video-->
+  <video *ngIf="data.type == 2" controls="" [currentTime]="data.curDuration" autoplay id="popVideo">
+    <source [src]="data.url | safe" type="video/mp4" />
+  </video>
+  <!--PDF and HTML-->
+  <iframe *ngIf="data.type == 1 || data.type == 3" [src]="data.url | safe"></iframe>
+  <!--External Links-->
+  <iframe *ngIf="data.type == 6" width="560" height="315" [src]="data.url | safe" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+</mat-dialog-content>
+
+<mat-dialog-actions>
+  <button class="mat-raised-button btn btn-danger" (click)="close()">Close</button>
+</mat-dialog-actions>

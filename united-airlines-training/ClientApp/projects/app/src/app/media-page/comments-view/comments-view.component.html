@@ -1,0 +1,59 @@
+
+<!--Queued comments are only displayed to moderators and up-->
+<section *ngIf="queuedCommentsViewable && !autoApprove">
+  <div class="row">
+    <div class="col">
+      <h2>Queued Comments</h2>
+    </div>
+  </div>
+  <div class="row" *ngIf="queuedComments.length == 0">
+    <div class="col">
+      <p>No comments waiting for approval.</p>
+    </div>
+  </div>
+  <app-comment *ngFor="let queued of queuedComments; let i = index"
+                [comment]="queued"
+                [currentUser]="currentUser"
+               [currentUserId]="currentUserId"
+               [isThreaded]="false"
+               [selectedMedia]="selectedMedia"
+               (onDelete)="onCommentDeleteRequest($event)"
+               (onApprove)="onCommentApproveRequest($event)"
+               ></app-comment>
+  <div *ngIf="loadMoreQueuedButton">
+    <button class="btn btn-primary mb-2" (click)="loadQueuedComments()">Load More</button>
+  </div>
+</section>
+<!--Comments currently approved for the media item-->
+<section>
+  <div class="row">
+    <div class="col">
+      <h2>Comments</h2>
+    </div>
+  </div>
+  <div class="row" *ngIf="approvedComments.length == 0">
+    <div class="col">
+      <p>No comments.</p>
+    </div>
+  </div>
+  <app-comment *ngFor="let comment of approvedComments; let i = index"
+                [comment]="comment"
+                [currentUser]="currentUser"
+               [currentUserId]="currentUserId"
+               [isThreaded]="false"
+               [selectedMedia]="selectedMedia"
+               (onReplySubmit)="createNewThreadedComment($event)"
+               (onDelete)="onCommentDeleteRequest($event)"
+               (onDeleteReply)="onCommentReplyDeleteRequest($event)"
+                ></app-comment>
+
+  <div class="CommentPost">
+    <div *ngIf="loadMoreButton">
+      <button class="btn btn-primary mb-2" (click)="loadMediaComments()">Load More</button>
+    </div>
+    <textarea rows="3" id="commentWriter" [(ngModel)]="inputField" (input)="updateCommentStatus()" placeholder="Write a comment..."></textarea>
+    <br />
+    <button (click)="createUserComment(inputField)" class="btn btn-primary mt-2 mb-5">Submit</button>
+    <p *ngIf="sendCommentStatus" style="color: red;">Comment has been sent. Waiting for approval.</p>
+  </div>
+</section>

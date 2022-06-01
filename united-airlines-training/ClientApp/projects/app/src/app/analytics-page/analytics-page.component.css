@@ -1,0 +1,60 @@
+.ng-valid[required], .ng-valid.required {
+  border-left: 5px solid #42A948;
+}
+
+.ng-invalid:not(form) {
+  border-left: 5px solid #a94442;
+}
+
+.origin-btn {
+  background-color: #00B2A9;
+  border: none;
+  color: white;
+  margin: 1px;
+}
+
+  .origin-btn:hover {
+    background-color: white;
+    color: black;
+  }
+
+.mat-form-field {
+  margin-left: 8px;
+}
+
+#search-btn {
+  margin: auto;
+  margin-left: 8px;
+}
+
+.mat-tab-group {
+  z-index: 0;
+  position: relative;
+}
+
+#input_section {
+  margin: 8px 8px 8px 0;
+  width: 100%;
+  text-align: center;
+}
+
+#filter-form {
+  min-width: 50px;
+  max-width: 500px;
+  width: 100%;
+  text-align: center;
+  margin: 8px 8px 8px 0;
+}
+
+.full-width {
+  width: 80px auto;
+}
+
+.media-item{
+    width:100%;
+}
+
+.info-span{
+    margin:auto;
+    margin-left:8px;
+}

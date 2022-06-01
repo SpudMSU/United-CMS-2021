@@ -1,0 +1,76 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-12 text-center mt-4">
+      <h2 class="mb-5">Manage Users</h2>
+    </div>
+  </div>
+</div>
+
+<div>
+  <div class="margin-diff-left">
+    <form class="form-inline my-2 my-lg-0">
+      <div class="form-group">
+        <select class="form-control" [(ngModel)]="selected" name="attributeOption" (change)="clearOtherInputs()">
+          <option *ngFor="let item of selectOptions">{{item.name}}</option>
+        </select>
+      </div>
+      <select *ngIf="selected == 'Employment Status'" class="form-control mr-sm-2 search-bar" [(ngModel)]="employmentInput" name="attributeOption2">
+        <option *ngFor="let status of statusOptions">{{status.name}}</option>
+      </select>
+      <select *ngIf="selected == 'Role Level'" class="form-control mr-sm-2 search-bar" [(ngModel)]="roleInput" name="attributeOption3">
+        <option *ngFor="let role of roleOptions">{{role.name}}</option>
+      </select>
+      <input *ngIf="selected != 'Employment Status' && selected != 'Role Level'" class="form-control mr-sm-2 search-bar" type="search" placeholder="Search User" aria-label="Search User" [(ngModel)]="userSearchInput" name="inputSearch">
+      <button class="btn my-2 my-sm-0 search-button" (click)="searchUser()" type="submit"><img src="{{SitePath}}/assets/images/icon.png"></button>
+    </form>
+    <div>
+      <p class="no-search" *ngIf="noSearchInput">Search requires input!</p>
+    </div>
+  </div>
+  <div class="d-flex justify-content-center">
+    <div class="table-responsive">
+      <table class="table user-table">
+        <thead>
+          <tr>
+            <th scope="col">United ID</th>
+            <th scope="col">Employment Status</th>
+            <th scope="col">First Name</th>
+            <th scope="col">Last Name</th>
+            <th scope="col">Email</th>
+            <th scope="col">Role Level</th>
+            <th scope="col">Department</th>
+            <th scope="col">Location</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let user of returnedUsers | paginate: { itemsPerPage: perPageCount, currentPage: p }; let i = index">
+            <td scope="row">{{user.uid}}</td>
+            <td scope="row">
+              <select class="form-control" [(ngModel)]="currentStatus[i + indexForPage]" name="attributeOption" (change)="updateSelected(i + indexForPage)">
+                <option *ngFor="let status of statusOptions">{{status.name}}</option>
+              </select>
+            </td>
+            <td scope="row">{{user.firstName}}</td>
+            <td scope="row">{{user.lastName}}</td>
+            <td scope="row">
+              <input class="form-control" (input)="updateEmail($event.target.value, i + indexForPage)" value={{user.email}} />
+            </td>
+            <td scope="row" style="width: 12em;">
+              <select class="form-control" [(ngModel)]="currentRole[i + indexForPage]" name="attributeOption" (change)="updateSelected(i + indexForPage)">
+                <option *ngFor="let role of roleOptions">{{role.name}}</option>
+              </select>
+            </td>
+            <td scope="row">{{user.department}}</td>
+            <td scope="row">{{user.locationCode}}</td>
+            <td *ngIf="saveChangesButton[i + indexForPage]"><i class="material-icons icon-save" (click)="openConfirmModal(i + indexForPage)">save</i></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    
+  </div>
+  <div class="pagNation mb-5">
+    <pagination-controls class="my-pagination mt-3" (click)="updateIndexPage(p)" (pageChange)="p = $event"></pagination-controls>
+  </div>
+  <h3 class="text-center mb-5" *ngIf="noResults">No users found. Please try another search.</h3>
+</div>
